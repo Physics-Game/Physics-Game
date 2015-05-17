@@ -5,12 +5,11 @@ import com.jared.waves.screen.GameScreen;
 
 public class Grid
 {
-	public static int curLayer = 0;
-	private Tile[][][] grid;
+	private Tile[][] grid;
 	
-	public Grid(int rows, int cols, int depth)
+	public Grid(int rows, int cols)
 	{
-		grid = new Tile[rows][cols][depth];
+		grid = new Tile[rows][cols];
 	}
 	
 	public void draw(SpriteBatch batch)

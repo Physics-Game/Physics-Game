@@ -33,7 +33,12 @@ public class MainMenuScreen implements Screen
 		content.add(bg = new Texture(PhysicsMain.ASSETPATH + "mainmenu/btn_bg.png"));
 		Runnable btnPlayRunnable = () ->
 		{
-			GameScreen.loadAndSet();
+			try {
+				GameScreen.loadAndSet();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		};
 		btnPlay = new Button(400f - bg.getWidth()/2, 300f - bg.getHeight()/2, btnPlayRunnable, bg, "Play");
 	}

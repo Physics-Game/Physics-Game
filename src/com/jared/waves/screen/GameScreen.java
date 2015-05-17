@@ -1,7 +1,6 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Buttons;
@@ -20,10 +19,9 @@ public class GameScreen implements Screen
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	public static OrthographicCamera cam;
 	public static Grid grid;
-	
 	private SpriteBatch batch;
 	
-	public static void loadAndSet()
+	public static void loadAndSet() throws InterruptedException
 	{
 		Screen loadingScreen = new Screen()
 		{
@@ -33,9 +31,9 @@ public class GameScreen implements Screen
 			@Override
 			public void create()
 			{
-				Gdx.app.log("DEBUG", "Loading Screen created");
-				content.add(batch = new SpriteBatch());
-				content.add(font = new BitmapFont());
+				Gdx.app.log("DEBUG", "LoadingScreen created");
+				GameScreen.content.add(batch = new SpriteBatch());
+				GameScreen.content.add(font = new BitmapFont());
 			}
 
 			@Override
@@ -57,29 +55,37 @@ public class GameScreen implements Screen
 			@Override
 			public void dispose()
 			{
-				Gdx.app.log("DEBUG", "Loading Screen disposed");
+				Gdx.app.log("DEBUG", "LoadingScreen disposed");
 			}
 		};
 		
 		Runnable load = () -> 
 		{
-				ScreenManager.setScreen(new GameScreen());
-					
+			Gdx.app.log("Wait", "Loading");
+			try {
+				//Thread.sleep(5000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			grid = new Grid(50,50);
+			ScreenManager.setScreen(new GameScreen());
 		};
-
+		
 		Thread loading = new Thread(load, "Loading-Game");
 		loading.start();
 		ScreenManager.setScreen(loadingScreen);
 	}
 	
+	
 	@Override
 	public void create()
 	{	
 		cam = new OrthographicCamera(800, 600);
-		cam.setToOrtho(false);;
+		cam.setToOrtho(false);
 		content.add(batch = new SpriteBatch());
 		Gdx.input.setInputProcessor(new InputHandler());
 	}	
+	
 	@Override
 	public void render()
 	{
@@ -89,6 +95,7 @@ public class GameScreen implements Screen
 		batch.begin();
 		batch.end();
 	}
+	
 	@Override
 	public void resize(int width, int height)
 	{
