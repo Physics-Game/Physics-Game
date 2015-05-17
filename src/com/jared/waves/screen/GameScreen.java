@@ -1,9 +1,10 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
@@ -63,12 +64,17 @@ public class GameScreen implements Screen
 		{
 			Gdx.app.log("Wait", "Loading");
 			try {
-				//Thread.sleep(5000);
+				Thread.sleep(10000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			grid = new Grid(50,50);
-			ScreenManager.setScreen(new GameScreen());
+			
+			Runnable run = () ->
+			{
+				ScreenManager.setScreen(new GameScreen());
+			};
+			Gdx.app.postRunnable(run);
 		};
 		
 		Thread loading = new Thread(load, "Loading-Game");
