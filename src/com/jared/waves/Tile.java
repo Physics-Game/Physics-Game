@@ -4,8 +4,8 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * Represents a Hex on the map.
- * @author Jason Carrete
+ * Represents a square on the map.
+ * @author Jared Bass
  */
 public class Tile
 {	

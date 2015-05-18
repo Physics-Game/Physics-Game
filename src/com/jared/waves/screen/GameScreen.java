@@ -1,16 +1,22 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 import com.jared.waves.Grid;
+import com.jared.waves.Level;
+import com.jared.waves.units.barriers.Reflector;
 
 public class GameScreen implements Screen
 {
@@ -66,8 +72,44 @@ public class GameScreen implements Screen
 				Thread.sleep(10000);
 			} catch (Exception e) {
 				e.printStackTrace();
+			}	
+			
+			JsonReader reader = new JsonReader();
+			JsonValue root = reader.parse(new FileHandle("json/levelData.json"));
+			JsonValue levels = root.get("levels"); 
+			int amtLevels = root.getInt("levelAmt");
+			Level[] levelArray = new Level[amtLevels];
+			
+			for(int level = 0; level < amtLevels; level++)
+			{
+				JsonValue indiLevel = levels.get(level);
+				for(int barrierC = 0; barrierC < indiLevel.size; barrierC++)
+				{
+					JsonValue barrier = indiLevel.get(barrierC);
+					
+					String type = barrier.getString("btype");
+					int x = barrier.getInt("x");
+					int y = barrier.getInt("y");
+					
+					switch(type)
+					{
+						case "reflect":
+						{
+							levelArray[level].addBarrier(new Reflector(x,y,10,10));
+							break;
+						}
+						case "refract":
+						{
+							
+						}
+						case "stick":
+						{
+							
+						}
+					}
+				}
+				
 			}
-			grid = new Grid(50,50);
 			
 			Runnable run = () ->
 			{
@@ -83,7 +125,7 @@ public class GameScreen implements Screen
 	
 	@Override
 	public void create()
-	{	
+	{
 		cam = new OrthographicCamera(800, 600);
 		cam.setToOrtho(false);
 		content.add(batch = new SpriteBatch());
