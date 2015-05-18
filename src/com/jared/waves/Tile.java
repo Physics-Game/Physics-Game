@@ -9,12 +9,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class Tile
 {	
+	private int row, col;
 	private static Tile selectedTile;
 	public static final float WIDTH = 50f, HEIGHT = 50f;
 
-	public Tile()
+	public Tile(int iRow, int iCol)
 	{
-		
+		row = iRow;
+		col = iCol;
 	}
 	
 	public void draw(SpriteBatch batch)

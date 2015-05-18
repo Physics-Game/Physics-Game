@@ -1,7 +1,6 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
@@ -81,7 +80,6 @@ public class GameScreen implements Screen
 		loading.start();
 		ScreenManager.setScreen(loadingScreen);
 	}
-	
 	
 	@Override
 	public void create()
