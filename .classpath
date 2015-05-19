@@ -3,5 +3,16 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Libgdx"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-backend-android.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-backend-gwt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-backend-headless.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-backend-jglfw.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-backend-jglfw-natives.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-backend-lwjgl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-backend-lwjgl-natives.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-backend-robovm.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-natives.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Darian/eclipse/libraries/libgdx/gdx-setup.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
