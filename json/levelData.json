@@ -3,7 +3,7 @@
 	"levels":
 	[
 		[
-			{"btype":"relfect","x":10,"y":20}
+			{"btype":"relfect","x":10,"y":20}, {"btype":"goal","x":400,"y":300}
 		]
 	]
 }

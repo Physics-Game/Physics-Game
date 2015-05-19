@@ -76,49 +76,50 @@ public class GameScreen implements Screen
 				e.printStackTrace();
 			}	
 			
-			JsonReader reader = new JsonReader();
-			JsonValue root = reader.parse(new FileHandle("json/levelData.json"));
-			JsonValue levels = root.get("levels"); 
-			int amtLevels = root.getInt("levelAmt");
-			levelArray = new Level[amtLevels];
-			
-			for(int level = 0; level < amtLevels; level++)
+			Runnable json = () ->
 			{
-				JsonValue indiLevel = levels.get(level);
-				for(int barrierC = 0; barrierC < indiLevel.size - 1; barrierC++)
+				JsonReader reader = new JsonReader();
+				JsonValue root = reader.parse(new FileHandle("json/levelData.json"));
+				JsonValue levels = root.get("levels"); 
+				int amtLevels = root.getInt("levelAmt");
+				levelArray = new Level[amtLevels];
+				for(int i = 0; i < levelArray.length; i++)
+					levelArray[i] = new Level();
+				
+				for(int level = 0; level < amtLevels; level++)
 				{
-					JsonValue barrier = indiLevel.get(barrierC);
-					
-					String type = barrier.getString("btype");
-					int x = barrier.getInt("x");
-					int y = barrier.getInt("y");
-					
-					switch(type)
+					JsonValue indiLevel = levels.get(level);
+					for(int barrierC = 0; barrierC < indiLevel.size - 1; barrierC++)
 					{
-						case "reflect":
+						JsonValue barrier = indiLevel.get(barrierC);
+						
+						String type = barrier.getString("btype");
+						int x = barrier.getInt("x");
+						int y = barrier.getInt("y");
+						
+						switch(type)
 						{
-							levelArray[level].addBarrier(new Reflector(x,y,10,10));
-							break;
-						}
-						case "refract":
-						{
-							
-						}
-						case "stick":
-						{
-							
+							case "reflect":
+							{
+								levelArray[level].addBarrier(new Reflector(x,y,10,10));
+								break;
+							}
+							case "refract":
+							{
+								
+							}
+							case "stick":
+							{
+								
+							}
 						}
 					}
+					JsonValue goal = indiLevel.get(indiLevel.size - 1);
+					levelArray[level].createGoal(new Goal(goal.getInt("x"), goal.getInt("y"), 10, 10));
 				}
-				JsonValue goal = indiLevel.get(indiLevel.size - 1);
-				levelArray[level].createGoal(new Goal(goal.getInt("x"), goal.getInt("y"), 10, 10));
-			}
-			
-			Runnable run = () ->
-			{
 				ScreenManager.setScreen(new GameScreen());
 			};
-			Gdx.app.postRunnable(run);
+			Gdx.app.postRunnable(json);
 		};
 		
 		Thread loading = new Thread(load, "Loading-Game");
