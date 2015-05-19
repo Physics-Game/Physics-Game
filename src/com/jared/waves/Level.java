@@ -28,12 +28,15 @@ public class Level
 	{
 		barriers.add(b);
 	}
-		
-	public void draw(SpriteBatch batch)
+	
+	public void initialDraw(SpriteBatch batch)
 	{
 		for(int i = 0; i < barriers.size(); i++)
 			barriers.get(i).draw(batch);
-		
+	}
+	
+	public void draw(SpriteBatch batch)
+	{		
 		wave.draw(batch);
 	}
 	

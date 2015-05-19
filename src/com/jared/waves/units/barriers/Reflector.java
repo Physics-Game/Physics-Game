@@ -15,7 +15,7 @@ public class Reflector implements Barrier
 	public Reflector(float x, float y, float width, float height)
 	{
 		hitbox = new Rectangle(x,y,width,height);
-		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/repflect.png"));
+		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png"));
 	}
 
 	@Override

@@ -93,24 +93,24 @@ public class GameScreen implements Screen
 					{
 						JsonValue barrier = indiLevel.get(barrierC);
 						
-						String type = barrier.getString("btype");
+						int type = barrier.getInt("btype");
 						int x = barrier.getInt("x");
 						int y = barrier.getInt("y");
 						
 						switch(type)
 						{
-							case "reflect":
+							case 1:
 							{
 								levelArray[level].addBarrier(new Reflector(x,y,10,10));
 								break;
 							}
-							case "refract":
+							case 2:
 							{
-								
+								break;
 							}
-							case "stick":
+							case 3:
 							{
-								
+								break;
 							}
 						}
 					}
@@ -145,6 +145,8 @@ public class GameScreen implements Screen
 		batch.begin();
 		for(int levelOn = 0; levelOn < levelArray.length; levelOn++)
 		{
+			levelArray[levelOn].initialDraw(batch);
+			
 			while(!levelArray[levelOn].isDone())
 				levelArray[levelOn].draw(batch);
 			
