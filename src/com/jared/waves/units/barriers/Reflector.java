@@ -11,11 +11,14 @@ public class Reflector implements Barrier
 {
 	private Rectangle hitbox;
 	private Texture background;
+	private double anglePerp;
 	
 	public Reflector(float x, float y, float width, float height)
 	{
 		hitbox = new Rectangle(x,y,width,height);
 		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png"));
+		
+		anglePerp = 90 + Math.acos(Math.abs(width - x)/Math.sqrt(Math.pow(Math.abs(width - x), 2) + Math.pow(Math.abs(height - y), 2)));
 	}
 
 	@Override
