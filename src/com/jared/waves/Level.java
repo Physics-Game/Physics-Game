@@ -5,18 +5,23 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
+import com.jared.waves.units.barriers.Goal;
 
 public class Level 
 {
 	private ArrayList<Barrier> barriers;
-	Grid levelGrid;
-	Wave wave;
+	private Wave wave;
+	private Goal goal;
 	
 	public Level()
 	{
-		levelGrid = new Grid(50,50);
 		barriers = new ArrayList<Barrier>();
 		wave = new Wave();
+	}
+	
+	public void createGoal(Goal g)
+	{
+		goal = new Goal(g);
 	}
 	
 	public void addBarrier(Barrier b)
@@ -30,5 +35,12 @@ public class Level
 			barriers.get(i).draw(batch);
 		
 		wave.draw(batch);
+	}
+	
+	public boolean isDone()
+	{
+		if(wave.hitsObject(goal))
+			return true;
+		return false;
 	}
 }

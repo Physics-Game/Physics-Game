@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.jared.waves.Grid;
 import com.jared.waves.Level;
+import com.jared.waves.units.barriers.Goal;
 import com.jared.waves.units.barriers.Reflector;
 
 public class GameScreen implements Screen
@@ -26,6 +27,7 @@ public class GameScreen implements Screen
 	public static OrthographicCamera cam;
 	public static Grid grid;
 	private SpriteBatch batch;
+	static Level[] levelArray;
 	
 	public static void loadAndSet() throws InterruptedException
 	{
@@ -78,12 +80,12 @@ public class GameScreen implements Screen
 			JsonValue root = reader.parse(new FileHandle("json/levelData.json"));
 			JsonValue levels = root.get("levels"); 
 			int amtLevels = root.getInt("levelAmt");
-			Level[] levelArray = new Level[amtLevels];
+			levelArray = new Level[amtLevels];
 			
 			for(int level = 0; level < amtLevels; level++)
 			{
 				JsonValue indiLevel = levels.get(level);
-				for(int barrierC = 0; barrierC < indiLevel.size; barrierC++)
+				for(int barrierC = 0; barrierC < indiLevel.size - 1; barrierC++)
 				{
 					JsonValue barrier = indiLevel.get(barrierC);
 					
@@ -108,7 +110,8 @@ public class GameScreen implements Screen
 						}
 					}
 				}
-				
+				JsonValue goal = indiLevel.get(indiLevel.size - 1);
+				levelArray[level].createGoal(new Goal(goal.getInt("x"), goal.getInt("y"), 10, 10));
 			}
 			
 			Runnable run = () ->
@@ -125,7 +128,7 @@ public class GameScreen implements Screen
 	
 	@Override
 	public void create()
-	{
+	{	
 		cam = new OrthographicCamera(800, 600);
 		cam.setToOrtho(false);
 		content.add(batch = new SpriteBatch());
@@ -139,6 +142,12 @@ public class GameScreen implements Screen
         
         batch.setProjectionMatrix(cam.combined);
 		batch.begin();
+		for(int levelOn = 0; levelOn < levelArray.length; levelOn++)
+		{
+			while(!levelArray[levelOn].isDone())
+				levelArray[levelOn].draw(batch);
+			
+		}
 		batch.end();
 	}
 	
@@ -165,8 +174,8 @@ public class GameScreen implements Screen
 	public static void clampCamera()
 	{
 		//constrain the camera's movement
-        cam.position.x = MathUtils.clamp(cam.position.x, 0, grid.getWidthPixels());
-        cam.position.y = MathUtils.clamp(cam.position.y, 0, grid.getHeightPixels());
+        cam.position.x = MathUtils.clamp(cam.position.x, 0, 800);
+        cam.position.y = MathUtils.clamp(cam.position.y, 0, 600);
         cam.zoom = MathUtils.clamp(cam.zoom, MIN_ZOOM, MAX_ZOOM);
         cam.update();
 	}
