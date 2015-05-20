@@ -2,6 +2,7 @@ package com.jared.waves;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
@@ -11,11 +12,13 @@ import com.jared.waves.units.barriers.Reflector;
 public class Level 
 {
 	private ArrayList<Barrier> barriers;
+	private Texture background;
 	private Wave wave;
 	private Goal goal;
 	
 	public Level()
 	{
+		background = new Texture(PhysicsMain.ASSETPATH + "levelBackground.jpg");
 		barriers = new ArrayList<Barrier>();
 		wave = new Wave();
 	}
@@ -32,6 +35,7 @@ public class Level
 	
 	public void initialDraw(SpriteBatch batch)
 	{
+		batch.draw(background, 0, 0);
 		for(int i = 0; i < barriers.size(); i++)
 			barriers.get(i).draw(batch);
 		wave.draw(batch);

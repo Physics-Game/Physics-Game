@@ -18,7 +18,7 @@ public class Reflector implements Barrier
 		hitbox = new Rectangle(x,y,width,height);
 		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png"));
 		
-		anglePerp = 90 + ang;
+		anglePerp = (90 + ang) % 360;
 	}
 
 	@Override

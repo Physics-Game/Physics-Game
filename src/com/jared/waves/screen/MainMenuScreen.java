@@ -1,8 +1,6 @@
 package com.jared.waves.screen;
 
-import java.io.File;
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
@@ -17,14 +15,15 @@ import com.jared.waves.widget.Button;
 
 /**
  * The menu for the game.
- * @author Darian Atkinson and Jared Bass
+ * @author Darian Atkinson 
+ * @author Jared Bass
  */
 public class MainMenuScreen implements Screen
 {
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	
 	private int width, height;
-	private Button btnPlay;
+	private Button btnPlay, btnHowToPlay;
 	private SpriteBatch batch;
 	private BitmapFont font;
 	
@@ -46,7 +45,19 @@ public class MainMenuScreen implements Screen
 				e.printStackTrace();
 			}
 		};
-		btnPlay = new Button(400f - bg.getWidth()/2, 300f - bg.getHeight()/2, btnPlayRunnable, bg, "Play");
+		btnPlay = new Button(400f - bg.getWidth()/2, 300f - bg.getHeight()/2 + 50, btnPlayRunnable, bg, "Play");
+		
+		Runnable btnHowToPlayRunnable = () ->
+		{
+			try {
+//				File f = new File("How To Play.txt");
+//				f.canExecute();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		};
+		
+		btnHowToPlay = new Button(400f - bg.getWidth()/2, 300f - bg.getHeight()/2, btnHowToPlayRunnable, bg, "How To Play");
 	}
 
 	@Override
@@ -55,12 +66,12 @@ public class MainMenuScreen implements Screen
 		String text = "The Wave Game";
 		TextBounds bounds = font.getBounds(text);
 		float x = Gdx.graphics.getWidth()/2 - bounds.width/2;
-		float y = Gdx.graphics.getHeight()*2/3 + bounds.height/2;
-		Texture t = new Texture(PhysicsMain.ASSETPATH + "mainbackground.png");
+		float y = Gdx.graphics.getHeight()*2/3 + bounds.height/2 + 85;
 		batch.begin();
-		batch.draw(t, 0, 0);
+		batch.draw(new Texture(PhysicsMain.ASSETPATH + "mainbackground.png"), 0, 0);
 		font.draw(batch, text, x, y);
 		btnPlay.draw(batch);
+		btnHowToPlay.draw(batch);
 		batch.end();
 	}
 
@@ -112,6 +123,8 @@ public class MainMenuScreen implements Screen
 			{
 				if(btnPlay.contains(screenX, screenY))
 					btnPlay.handleClick(button);
+				else if(btnHowToPlay.contains(screenX, screenY))
+					btnHowToPlay.handleClick(button);
 				return true;
 			}
 			return false;
