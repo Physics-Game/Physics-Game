@@ -1,19 +1,23 @@
 package com.jared.waves.screen;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.utils.Disposable;
 import com.jared.waves.PhysicsMain;
 import com.jared.waves.widget.Button;
 
 /**
  * The menu for the game.
- * @author Jason Carrete
+ * @author Darian Atkinson and Jared Bass
  */
 public class MainMenuScreen implements Screen
 {
@@ -22,11 +26,13 @@ public class MainMenuScreen implements Screen
 	private int width, height;
 	private Button btnPlay;
 	private SpriteBatch batch;
+	private BitmapFont font;
 	
 	@Override
 	public void create()
 	{
 		content.add(batch = new SpriteBatch());
+		content.add(font = new BitmapFont());
 		Gdx.input.setInputProcessor(new InputHandler());
 		
 		Texture bg;
@@ -46,7 +52,15 @@ public class MainMenuScreen implements Screen
 	@Override
 	public void render()
 	{
+		String text = "The Wave Game";
+		TextBounds bounds = font.getBounds(text);
+		float x = Gdx.graphics.getWidth()/2 - bounds.width/2;
+		float y = Gdx.graphics.getHeight()*2/3 + bounds.height/2;
+		Texture t = new Texture(PhysicsMain.ASSETPATH + "Draw-Waves-Step-9.jpg");
+		
 		batch.begin();
+		batch.draw(t, 0, 0);
+		font.draw(batch, text, x, y);
 		btnPlay.draw(batch);
 		batch.end();
 	}
