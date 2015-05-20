@@ -96,12 +96,18 @@ public class GameScreen implements Screen
 						int type = barrier.getInt("btype");
 						int x = barrier.getInt("x");
 						int y = barrier.getInt("y");
+						int theta = 0;
+						try{
+							theta = barrier.getInt("ang");
+						}catch (Exception e){
+							System.err.println("There isn't any angle");
+						}
 						
 						switch(type)
 						{
 							case 1:
 							{
-								levelArray[level].addBarrier(new Reflector(x,y,10,10));
+								levelArray[level].addBarrier(new Reflector(x,y,10,10, theta));
 								break;
 							}
 							case 2:
