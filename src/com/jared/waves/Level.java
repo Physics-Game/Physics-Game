@@ -18,7 +18,7 @@ public class Level
 	
 	public Level()
 	{
-		background = new Texture(PhysicsMain.ASSETPATH + "levelBackground.jpg");
+		background = new Texture(PhysicsMain.ASSETPATH + "levelBackground.png");
 		barriers = new ArrayList<Barrier>();
 		wave = new Wave();
 	}

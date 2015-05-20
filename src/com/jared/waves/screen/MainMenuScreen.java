@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -38,14 +37,9 @@ public class MainMenuScreen implements Screen
 		content.add(bg = new Texture(PhysicsMain.ASSETPATH + "mainmenu/btn_bg.png"));
 		Runnable btnPlayRunnable = () ->
 		{
-			try {
-				GameScreen.loadAndSet();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			ScreenManager.setScreen(new GameScreen());
 		};
-		btnPlay = new Button(400f - bg.getWidth()/2, 300f - bg.getHeight()/2 + 50, btnPlayRunnable, bg, "Play");
+		btnPlay = new Button(640f - bg.getWidth()/2, 480f - bg.getHeight()/2 + 50, btnPlayRunnable, bg, "Play");
 		
 		Runnable btnHowToPlayRunnable = () ->
 		{
@@ -57,7 +51,7 @@ public class MainMenuScreen implements Screen
 			}
 		};
 		
-		btnHowToPlay = new Button(400f - bg.getWidth()/2, 300f - bg.getHeight()/2, btnHowToPlayRunnable, bg, "How To Play");
+		btnHowToPlay = new Button(640f - bg.getWidth()/2, 480f - bg.getHeight()/2, btnHowToPlayRunnable, bg, "How To Play");
 	}
 
 	@Override

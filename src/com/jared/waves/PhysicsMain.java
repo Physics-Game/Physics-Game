@@ -1,4 +1,5 @@
 package com.jared.waves;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
@@ -16,8 +17,8 @@ public class PhysicsMain implements ApplicationListener
 	{
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Waves";
-		cfg.width = 800;
-		cfg.height = 600;
+		cfg.width = 1280;
+		cfg.height = 960;
 		cfg.addIcon(ASSETPATH + "icon-128.png", FileType.Classpath);
 		cfg.addIcon(ASSETPATH + "icon-32.png", FileType.Classpath);
 		cfg.addIcon(ASSETPATH + "icon-16.png", FileType.Classpath);
