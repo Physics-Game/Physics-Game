@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
 import com.jared.waves.units.barriers.Goal;
+import com.jared.waves.units.barriers.Reflector;
 
 public class Level 
 {
@@ -33,11 +34,21 @@ public class Level
 	{
 		for(int i = 0; i < barriers.size(); i++)
 			barriers.get(i).draw(batch);
+		wave.draw(batch);
 	}
 	
 	public void draw(SpriteBatch batch)
-	{		
-		wave.draw(batch);
+	{
+		boolean flag = false;
+		
+		for(Barrier r : barriers)
+			if(r.hits(wave))
+			{
+				wave.rotateWave((float)((Reflector)r).getChangedAngle());
+				flag = true;
+			}
+		if(!flag)
+			wave.translateWave();
 	}
 	
 	public boolean isDone()

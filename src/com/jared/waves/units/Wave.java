@@ -48,6 +48,16 @@ public class Wave
 		return wave;
 	}
 	
+	public float getX()
+	{
+		return x;
+	}
+	
+	public float getY()
+	{
+		return y;
+	}
+	
 	public void draw(SpriteBatch batch)
 	{
 		batch.draw(texture, x, y);

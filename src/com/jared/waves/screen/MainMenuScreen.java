@@ -56,8 +56,7 @@ public class MainMenuScreen implements Screen
 		TextBounds bounds = font.getBounds(text);
 		float x = Gdx.graphics.getWidth()/2 - bounds.width/2;
 		float y = Gdx.graphics.getHeight()*2/3 + bounds.height/2;
-		Texture t = new Texture(PhysicsMain.ASSETPATH + "Draw-Waves-Step-9.jpg");
-		
+		Texture t = new Texture(PhysicsMain.ASSETPATH + "mainbackground.png");
 		batch.begin();
 		batch.draw(t, 0, 0);
 		font.draw(batch, text, x, y);

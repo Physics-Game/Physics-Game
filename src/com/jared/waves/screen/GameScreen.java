@@ -71,7 +71,7 @@ public class GameScreen implements Screen
 		{
 			Gdx.app.log("Wait", "Loading");
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(3000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}	
@@ -148,11 +148,18 @@ public class GameScreen implements Screen
         clampCamera();        
         
         batch.setProjectionMatrix(cam.combined);
+        batch.dispose();
+        try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		batch.begin();
 		for(int levelOn = 0; levelOn < levelArray.length; levelOn++)
 		{
 			levelArray[levelOn].initialDraw(batch);
-			
+			System.out.println("Rendering...");
 			while(!levelArray[levelOn].isDone())
 				levelArray[levelOn].draw(batch);
 			

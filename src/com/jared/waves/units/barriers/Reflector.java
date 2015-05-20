@@ -33,7 +33,11 @@ public class Reflector implements Barrier
 		batch.draw(background, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 	}
 	
-
+	public double getChangedAngle()
+	{
+		return anglePerp;
+	}
+	
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
