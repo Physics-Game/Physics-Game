@@ -50,8 +50,8 @@ public class MainMenuScreen implements Screen
 		Runnable btnHowToPlayRunnable = () ->
 		{
 			try {
-//				File f = new File("How To Play.txt");
-//				f.canExecute();
+				ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "How To Play.txt");
+				pb.start();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
