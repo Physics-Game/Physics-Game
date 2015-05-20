@@ -128,9 +128,8 @@ public class GameScreen implements Screen
 			Gdx.app.postRunnable(json);
 		};
 		
-		Thread loading = new Thread(load, "Loading-Game");
-		loading.start();
 		ScreenManager.setScreen(loadingScreen);
+		load.run();
 	}
 	
 	@Override
@@ -160,17 +159,12 @@ public class GameScreen implements Screen
 			Gdx.app.log("DEBUG", "Rendering Level " + (levelOn + 1));
 			
 			levelArray[levelOn].initialDraw(batch);
-			
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+
 			while(!levelArray[levelOn].isDone())
+			{
+				System.out.println("Drawing...");
 				levelArray[levelOn].draw(batch);
-			
+			}
 		}
 		batch.end();
 	}
