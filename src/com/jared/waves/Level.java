@@ -36,6 +36,7 @@ public class Level
 	public void initialDraw(SpriteBatch batch)
 	{
 		batch.draw(background, 0, 0);
+		
 		for(int i = 0; i < barriers.size(); i++)
 			barriers.get(i).draw(batch);
 		wave.draw(batch);
