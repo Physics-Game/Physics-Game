@@ -36,15 +36,15 @@ public class Wave
 	public Wave(Sprite s)
 	{
 		this.s = s;
-		wave = new Vector2();
-		wave.setLength(1);
-		wave.setAngle(0);
+		wave = new Vector2(1, 0);
 		x = 0;
 		y = 0;
 	}
 	
 	public void rotateWave(float degrees)
 	{
+		wave.setAngle(98);
+		System.out.println(wave);
 		wave.setAngle(degrees);
 		s.setRotation(degrees);
 	}

@@ -97,7 +97,7 @@ public class GameScreen implements Screen
 		clampCamera();        
 
 		batch.setProjectionMatrix(cam.combined);
-		if(!levelArray[levelOn].isDone())
+		if(levelOn < levelArray.length && !levelArray[levelOn].isDone())
 		{
 			batch.begin();
 
