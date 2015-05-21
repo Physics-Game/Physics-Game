@@ -33,6 +33,11 @@ public class Level
 		barriers.add(b);
 	}
 	
+	public void initFire(float x, float y)
+	{
+		wave.rotateWave((float)Math.atan(y/x));
+	}
+	
 	public void initialDraw(SpriteBatch batch)
 	{
 		batch.draw(background, 0, 0);

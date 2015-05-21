@@ -25,7 +25,7 @@ public class GameScreen implements Screen
 	public static OrthographicCamera cam;
 	public static Grid grid;
 	private SpriteBatch batch;
-	private boolean flagInitDraw;
+	private boolean flagInitFire;
 	public static Level[] levelArray;
 	public static int levelOn = 0;
 	
@@ -37,7 +37,7 @@ public class GameScreen implements Screen
 		content.add(batch = new SpriteBatch());
 		Gdx.input.setInputProcessor(new InputHandler());
 		
-		flagInitDraw = false;
+		flagInitFire = false;
 		
 		JsonReader reader = new JsonReader();
 		JsonValue root = reader.parse(new FileHandle("json/levelData.json"));
@@ -178,8 +178,8 @@ public class GameScreen implements Screen
 
 			if(button == Buttons.LEFT)
 			{
-				if(flagInitDraw)
-									
+				if(!flagInitFire)
+					levelArray[levelOn].initFire(screenX, screenY);
 				//stop sliding when the user clicks on the screen again
 				if(draggedThread != null && draggedThread.isAlive())
 					draggedThread.interrupt();
