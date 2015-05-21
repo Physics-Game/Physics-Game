@@ -63,6 +63,11 @@ public class GameScreen implements Screen
 			@Override
 			public void dispose()
 			{
+				for(Disposable d : content)
+				{
+					d.dispose();
+					System.out.println("Disposed");
+				}
 				Gdx.app.log("DEBUG", "LoadingScreen disposed");
 			}
 		};
@@ -128,8 +133,9 @@ public class GameScreen implements Screen
 			Gdx.app.postRunnable(json);
 		};
 		
+		Thread loading = new Thread(load, "Loading-Game");
 		ScreenManager.setScreen(loadingScreen);
-		load.run();
+		loading.start();
 	}
 	
 	@Override
