@@ -101,13 +101,14 @@ public class GameScreen implements Screen
 		{
 			batch.begin();
 
-			Gdx.app.log("DEBUG", "Rendering Level " + (levelOn + 1));
+//			Gdx.app.log("DEBUG", "Rendering Level " + (levelOn + 1));
 
 			levelArray[levelOn].initialDraw(batch);
 			
-			System.out.println("Drawing...");
+//			System.out.println("Drawing...");
 			
-			levelArray[levelOn].draw(batch);
+			if(flagInitFire)
+				levelArray[levelOn].draw(batch);
 			
 			batch.end();
 
@@ -179,8 +180,10 @@ public class GameScreen implements Screen
 			if(button == Buttons.LEFT)
 			{
 				if(!flagInitFire)
-					levelArray[levelOn].initFire(ScreenManager.getScreen(), screenX, screenY);
-			
+				{
+					levelArray[levelOn].initFire(ScreenManager.getScreen(), screenX, Gdx.graphics.getHeight() - screenY);
+					flagInitFire = true;
+				}
 				return true;
 			}
 			return false;

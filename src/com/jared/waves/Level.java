@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jared.waves.screen.Screen;
 import com.jared.waves.units.Wave;
@@ -21,7 +22,7 @@ public class Level
 	{
 		background = new Texture(PhysicsMain.ASSETPATH + "levelBackground.png");
 		barriers = new ArrayList<Barrier>();
-		wave = new Wave();
+		wave = new Wave(new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png")));
 	}
 	
 	public void createGoal(Goal g)
@@ -36,12 +37,12 @@ public class Level
 	
 	public void initFire(Screen b, float x, float y)
 	{
-		wave.rotateWave((float)Math.atan(y/(double)x));
+		wave.rotateWave((float)Math.toDegrees(Math.atan(Math.abs(y/(double)x))));
 		translateWave();
 		Gdx.graphics.requestRendering();
 		Gdx.app.log("DEBUG", "FIRE");
 		Gdx.app.log("DEBUG", "Mouse x: " + x + ", Mouse y: " + y);
-		Gdx.app.log("DEBUG", "Wave x: " + wave.getX() + ", Wave y: " + wave.getY());
+		Gdx.app.log("DEBUG", "Angle: " + (float)Math.toDegrees(Math.atan(y/(double)x)));
 	}
 	
 	public void initialDraw(SpriteBatch batch)
@@ -70,9 +71,6 @@ public class Level
 	
 	public void translateWave()
 	{
-		wave = new Wave((float)(wave.getVector().len() * Math.cos((double)wave.getVector().angle() + wave.getX())), (float)(wave.getVector().len() * Math.sin((double)wave.getVector().angle()) + wave.getY()));
-		Gdx.app.log("DEBUG", "X: " + wave.getX() + ", Y: " + wave.getY());
-		System.out.println(wave.getVector().angle());
+		wave.translate();  
 	}
-	
 }

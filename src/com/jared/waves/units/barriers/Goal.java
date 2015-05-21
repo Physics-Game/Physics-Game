@@ -1,6 +1,7 @@
 package com.jared.waves.units.barriers;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.jared.waves.PhysicsMain;
@@ -25,9 +26,9 @@ public class Goal implements Barrier
 	}
 	
 	@Override
-	public boolean hits(Wave w)
+	public boolean hits(Sprite wave)
 	{
-		return hitbox.contains(w.getVector());
+		return hitbox.contains(wave.getX(), wave.getY());
 	}
 	
 	@Override
