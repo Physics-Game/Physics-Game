@@ -18,7 +18,7 @@ public class Level
 	
 	public Level()
 	{
-		background = new Texture(PhysicsMain.ASSETPATH + "levelBackground.jpg");
+		background = new Texture(PhysicsMain.ASSETPATH + "levelBackground.png");
 		barriers = new ArrayList<Barrier>();
 		wave = new Wave();
 	}
@@ -43,16 +43,7 @@ public class Level
 	
 	public void draw(SpriteBatch batch)
 	{
-		boolean flag = false;
-		
-		for(Barrier r : barriers)
-			if(r.hits(wave))
-			{
-				wave.rotateWave((float)((Reflector)r).getChangedAngle());
-				flag = true;
-			}
-		if(!flag)
-			wave.translateWave();
+		wave.translateWave();
 	}
 	
 	public boolean isDone()
