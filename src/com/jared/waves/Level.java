@@ -9,7 +9,6 @@ import com.jared.waves.screen.Screen;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
 import com.jared.waves.units.barriers.Goal;
-import com.jared.waves.units.barriers.Reflector;
 
 public class Level 
 {
