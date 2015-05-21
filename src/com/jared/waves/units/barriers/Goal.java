@@ -42,4 +42,10 @@ public class Goal implements Barrier
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public double getChangedAngle() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

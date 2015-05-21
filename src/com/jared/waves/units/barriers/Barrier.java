@@ -22,6 +22,8 @@ public interface Barrier
 	 */
 	void draw(SpriteBatch batch);
 	
+	public double getChangedAngle();
+	
 	/**
 	 * Updates this barrier's position based on the new width and height of the screen.
 	 * @param width New width of the screen.

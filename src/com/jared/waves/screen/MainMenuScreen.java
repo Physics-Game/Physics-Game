@@ -46,6 +46,7 @@ public class MainMenuScreen implements Screen
 			try {
 				ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "How To Play.txt");
 				pb.start();
+				Gdx.app.log("Note", "Launching How to Play text file");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

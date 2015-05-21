@@ -19,7 +19,7 @@ public class Wave
 		x = 0;
 		y = 0;
 		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png"));
-	}
+	}	
 	
 	public Wave(float xPos, float yPos)
 	{
@@ -35,7 +35,8 @@ public class Wave
 	
 	public void translateWave()
 	{
-		wave.add(x/wave.len(), y/wave.len());
+		x += wave.len() * Math.cos((double)wave.angle());
+		y += wave.len() * Math.sin((double)wave.angle());
 	}
 	
 	public boolean hitsObject(Barrier b)

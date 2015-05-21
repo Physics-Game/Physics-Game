@@ -2,8 +2,10 @@ package com.jared.waves;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.jared.waves.screen.Screen;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
 import com.jared.waves.units.barriers.Goal;
@@ -33,9 +35,13 @@ public class Level
 		barriers.add(b);
 	}
 	
-	public void initFire(float x, float y)
+	public void initFire(Screen b, float x, float y)
 	{
 		wave.rotateWave((float)Math.atan(y/x));
+		wave.translateWave();
+		Gdx.graphics.requestRendering();
+		Gdx.app.log("DEBUG", "FIRE");
+		Gdx.app.log("DEBUG", "x: " + wave.getX() + ", y: " + wave.getY());
 	}
 	
 	public void initialDraw(SpriteBatch batch)
@@ -43,7 +49,10 @@ public class Level
 		batch.draw(background, 0, 0);
 		
 		for(int i = 0; i < barriers.size(); i++)
-			barriers.get(i).draw(batch);
+//			if(barriers.get(i).getChangedAngle() == 0)
+				barriers.get(i).draw(batch);
+//			else
+//				barriers.get(i)
 		wave.draw(batch);
 	}
 	

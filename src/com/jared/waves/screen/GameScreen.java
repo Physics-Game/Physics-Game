@@ -179,7 +179,7 @@ public class GameScreen implements Screen
 			if(button == Buttons.LEFT)
 			{
 				if(!flagInitFire)
-					levelArray[levelOn].initFire(screenX, screenY);
+					levelArray[levelOn].initFire(ScreenManager.getScreen(), screenX, screenY);
 				//stop sliding when the user clicks on the screen again
 				if(draggedThread != null && draggedThread.isAlive())
 					draggedThread.interrupt();
