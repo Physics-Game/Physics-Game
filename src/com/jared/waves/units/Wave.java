@@ -1,5 +1,6 @@
 package com.jared.waves.units;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -9,13 +10,14 @@ import com.jared.waves.units.barriers.Barrier;
 
 public class Wave
 {
-	private Vector2 wave;
+	private static Vector2 wave;
 	private Texture texture;
-	float x, y;
+	private float x, y;
 	
 	public Wave()
 	{
 		wave = new Vector2();
+		wave.setLength(1);
 		x = 0;
 		y = 0;
 		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png"));
@@ -26,17 +28,12 @@ public class Wave
 		wave = new Vector2(xPos, yPos);
 		x = xPos;
 		y = yPos;
+		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png"));
 	}
 	
 	public void rotateWave(float degrees)
 	{
 		wave.setAngle(degrees);
-	}
-	
-	public void translateWave()
-	{
-		x += wave.len() * Math.cos((double)wave.angle());
-		y += wave.len() * Math.sin((double)wave.angle());
 	}
 	
 	public boolean hitsObject(Barrier b)
@@ -62,5 +59,6 @@ public class Wave
 	public void draw(SpriteBatch batch)
 	{
 		batch.draw(texture, x, y);
+		Gdx.app.log("DEBUG", "X: " + x + ", Y: " + y );
 	}
 }

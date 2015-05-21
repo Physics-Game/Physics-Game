@@ -37,11 +37,12 @@ public class Level
 	
 	public void initFire(Screen b, float x, float y)
 	{
-		wave.rotateWave((float)Math.atan(y/x));
-		wave.translateWave();
+		wave.rotateWave((float)Math.atan(y/(double)x));
+		translateWave();
 		Gdx.graphics.requestRendering();
 		Gdx.app.log("DEBUG", "FIRE");
-		Gdx.app.log("DEBUG", "x: " + wave.getX() + ", y: " + wave.getY());
+		Gdx.app.log("DEBUG", "Mouse x: " + x + ", Mouse y: " + y);
+		Gdx.app.log("DEBUG", "Wave x: " + wave.getX() + ", Wave y: " + wave.getY());
 	}
 	
 	public void initialDraw(SpriteBatch batch)
@@ -58,7 +59,7 @@ public class Level
 	
 	public void draw(SpriteBatch batch)
 	{
-		wave.translateWave();
+		translateWave();
 	}
 	
 	public boolean isDone()
@@ -67,4 +68,12 @@ public class Level
 			return true;
 		return false;
 	}
+	
+	public void translateWave()
+	{
+		wave = new Wave((float)(wave.getVector().len() * Math.cos((double)wave.getVector().angle() + wave.getX())), (float)(wave.getVector().len() * Math.sin((double)wave.getVector().angle()) + wave.getY()));
+		Gdx.app.log("DEBUG", "X: " + wave.getX() + ", Y: " + wave.getY());
+		System.out.println(wave.getVector().angle());
+	}
+	
 }
