@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.jared.waves.screen.GameScreen;
 import com.jared.waves.screen.Screen;
 import com.jared.waves.units.Wave;
@@ -49,8 +48,6 @@ public class Level
 	public void initialDraw(SpriteBatch batch)
 	{
 		batch.draw(background, 0, 0);
-		
-		ShapeRenderer s = new ShapeRenderer();
 		
 		for(int i = 0; i < barriers.size(); i++)
 			barriers.get(i).draw(batch);

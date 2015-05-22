@@ -21,7 +21,6 @@ public class MainMenuScreen implements Screen
 {
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	
-	private int width, height;
 	private Button btnPlay, btnHowToPlay;
 	private SpriteBatch batch;
 	private BitmapFont font;
@@ -73,8 +72,7 @@ public class MainMenuScreen implements Screen
 	@Override
 	public void resize(int width, int height)
 	{
-		this.width = width;
-		this.height = height;
+		
 	}
 
 	@Override

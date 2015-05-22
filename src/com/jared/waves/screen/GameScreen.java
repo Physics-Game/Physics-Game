@@ -8,11 +8,9 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
-import com.jared.waves.Grid;
 import com.jared.waves.Level;
 import com.jared.waves.units.barriers.Goal;
 import com.jared.waves.units.barriers.Reflector;
@@ -23,7 +21,6 @@ public class GameScreen implements Screen
 
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	public static OrthographicCamera cam;
-	public static Grid grid;
 	private SpriteBatch batch;
 	public static boolean flagInitFire;
 	public static Level[] levelArray;
@@ -94,8 +91,6 @@ public class GameScreen implements Screen
 	@Override
 	public void render()
 	{
-		clampCamera();        
-
 		batch.setProjectionMatrix(cam.combined);
 		if(levelOn < levelArray.length && !levelArray[levelOn].isDone())
 		{
@@ -117,15 +112,15 @@ public class GameScreen implements Screen
 		{
 			flagInitFire = false;
 			levelOn++;
+			if(levelOn > levelArray.length)
+				ScreenManager.setScreen(new MainMenuScreen());
 		}
 	}
 
 	@Override
 	public void resize(int width, int height)
 	{
-		cam.viewportWidth = width;
-		cam.viewportHeight = height;
-		clampCamera();
+		
 	}
 
 	@Override
@@ -136,24 +131,8 @@ public class GameScreen implements Screen
 			d.dispose();
 	}
 
-	/**
-	 * Ensures the camera doesn't go beyond the borders of the map.<br>
-	 * Also ensures the camera is within the appropriate zoom range.
-	 */
-	public static void clampCamera()
-	{
-		//constrain the camera's movement
-		cam.position.x = MathUtils.clamp(cam.position.x, 0, 800);
-		cam.position.y = MathUtils.clamp(cam.position.y, 0, 600);
-		cam.zoom = MathUtils.clamp(cam.zoom, MIN_ZOOM, MAX_ZOOM);
-		cam.update();
-	}
-
 	private class InputHandler implements InputProcessor
 	{
-		private Thread draggedThread;
-		private int button;
-
 		@Override
 		public boolean keyDown(int keycode)
 		{
@@ -176,8 +155,6 @@ public class GameScreen implements Screen
 		@Override
 		public boolean touchDown(int screenX, int screenY, int pointer, int button)
 		{
-			this.button = button;
-
 			if(button == Buttons.LEFT)
 			{
 				if(!flagInitFire)
@@ -211,10 +188,7 @@ public class GameScreen implements Screen
 		@Override
 		public boolean scrolled(int amount)
 		{
-			float zoom = cam.zoom + amount / 10.0f;
-			cam.zoom = zoom;
-			clampCamera();
-			return true;
+			return false;
 		}
 	}
 
