@@ -26,9 +26,10 @@ public class Goal implements Barrier
 	}
 	
 	@Override
-	public boolean hits(Sprite wave)
+	public boolean hits(Wave wave)
 	{
-		return hitbox.contains(wave.getX(), wave.getY());
+		Sprite waveS = wave.getSprite();
+		return hitbox.contains(waveS.getX(), waveS.getY());
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package com.jared.waves.units;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -36,7 +38,7 @@ public class Wave
 	public Wave(Sprite s)
 	{
 		this.s = s;
-		wave = new Vector2(3, 0);
+		wave = new Vector2(5, 0);
 		x = 0;
 		y = 0;
 	}
@@ -49,7 +51,26 @@ public class Wave
 	
 	public boolean hitsObject(Barrier b)
 	{
-		return b.hits(s);
+		return b.hits(this);
+	}
+	
+	public int hits(ArrayList<Barrier> barriers)
+	{
+		String thing = "";
+		
+		for(int i = 0; i < barriers.size(); i++)
+		{
+			Barrier b = barriers.get(i);
+			if(b.hits(this))
+				thing = b.getClass().getSimpleName();
+			
+			if(thing.equals("Reflector"))
+				return 1;
+			if(thing.equals("Refractor"))
+				return 2;
+		}
+		
+		return 0;
 	}
 	
 	public Vector2 getVector()
@@ -67,6 +88,11 @@ public class Wave
 		return y;
 	}
 	
+	public Sprite getSprite()
+	{
+		return s;
+	}
+	
 	public void translate()
 	{
 		float xTrans = (float)(wave.len() * Math.cos(Math.toRadians((double)wave.angle())));
@@ -81,7 +107,5 @@ public class Wave
 	public void draw(SpriteBatch batch)
 	{
 		s.draw(batch);
-		if(!(x == 0 && y == 0))
-			Gdx.app.log("DEBUG", "X: " + x + ", Y: " + y );
 	}
 }

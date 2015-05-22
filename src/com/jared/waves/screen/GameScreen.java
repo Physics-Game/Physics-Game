@@ -21,7 +21,7 @@ public class GameScreen implements Screen
 
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	public static OrthographicCamera cam;
-	private SpriteBatch batch;
+	private static SpriteBatch batch = new SpriteBatch();
 	public static boolean flagInitFire;
 	public static Level[] levelArray;
 	public static int levelOn = 0;
@@ -31,7 +31,6 @@ public class GameScreen implements Screen
 	{	
 		cam = new OrthographicCamera(800, 600);
 		cam.setToOrtho(false);
-		content.add(batch = new SpriteBatch());
 		Gdx.input.setInputProcessor(new InputHandler());
 		
 		flagInitFire = false;
@@ -95,15 +94,14 @@ public class GameScreen implements Screen
 		if(levelOn < levelArray.length && !levelArray[levelOn].isDone())
 		{
 			batch.begin();
-
-			Gdx.app.log("DEBUG", "Rendering Level " + (levelOn + 1));
-
-			levelArray[levelOn].initialDraw(batch);
+			Level l = levelArray[levelOn];
 			
-			System.out.println("Drawing...");
+			l.initialDraw(batch);
 			
 			if(flagInitFire)
-				levelArray[levelOn].draw(batch);
+				l.draw(batch);
+			
+			l.checkForHits();
 			
 			batch.end();
 
@@ -112,8 +110,13 @@ public class GameScreen implements Screen
 		{
 			flagInitFire = false;
 			levelOn++;
-			if(levelOn > levelArray.length)
-				ScreenManager.setScreen(new MainMenuScreen());
+			if(levelOn == levelArray.length)
+			{
+				ScreenManager.setScreen(new WinScreen());
+				batch.dispose();
+			}
+			else
+				ScreenManager.setScreen(new InBetweenScreen());				
 		}
 	}
 
@@ -191,7 +194,4 @@ public class GameScreen implements Screen
 			return false;
 		}
 	}
-
-
-
 }

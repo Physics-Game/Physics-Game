@@ -1,10 +1,10 @@
 package com.jared.waves.units.barriers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.jared.waves.PhysicsMain;
 import com.jared.waves.screen.GameScreen;
 import com.jared.waves.units.Wave;
@@ -14,8 +14,10 @@ public class Reflector implements Barrier
 	private Rectangle hitbox;
 	private Sprite s;
 	private Texture background;
-	private double anglePerp, degrees;
+	private double degrees;
+	private float anglePerp;
 	private boolean oneRotate;
+	private Vector2 perpendicular;
 	
 	public Reflector(float x, float y, float width, float height, float ang)
 	{
@@ -30,12 +32,23 @@ public class Reflector implements Barrier
 		
 		degrees = ang;
 		anglePerp = (90 + ang) % 360;
+		perpendicular = new Vector2(1,0);
+		perpendicular.setAngle(anglePerp);
+		perpendicular.setLength(1);
 	}
 
 	public boolean hits(Wave w)
 	{
-		//return hitbox.contains(w.getVector());
-		return false;
+		return hitbox.contains(w.getVector());
+	}
+	
+	public Wave reflect(Wave w)
+	{
+		Vector2 waveVector = w.getVector();
+		
+		System.out.println(perpendicular.angle(waveVector));
+		
+		return w;
 	}
 	
 	@Override
@@ -59,10 +72,5 @@ public class Reflector implements Barrier
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public boolean hits(Sprite wave) {
-		return false;
 	}
 }

@@ -11,6 +11,7 @@ import com.jared.waves.screen.Screen;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
 import com.jared.waves.units.barriers.Goal;
+import com.jared.waves.units.barriers.Reflector;
 
 public class Level 
 {
@@ -21,7 +22,7 @@ public class Level
 	
 	public Level()
 	{
-		background = new Texture(PhysicsMain.ASSETPATH + "levelBackground.png");
+		background = new Texture(PhysicsMain.ASSETPATH + "background/levelBackground.png");
 		barriers = new ArrayList<Barrier>();
 		wave = new Wave(new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png")));
 	}
@@ -79,5 +80,39 @@ public class Level
 	public void translateWave()
 	{
 		wave.translate();  
+	}
+	
+	public Wave getWave()
+	{
+		return wave;
+	}
+	
+	public ArrayList<Barrier> getBarriers()
+	{
+		return barriers;
+	}
+	
+	public void checkForHits()
+	{
+		switch(wave.hits(barriers))
+		{
+			case 0:
+			{
+				break;
+			}
+			case 1:
+			{
+				for(int i = 0; i < barriers.size(); i++)
+				{
+					Reflector r = (Reflector) barriers.get(i);
+						if(r.hits(wave))
+							r.reflect(wave);
+				}
+			}
+			case 2:
+			{
+				
+			}
+		}
 	}
 }

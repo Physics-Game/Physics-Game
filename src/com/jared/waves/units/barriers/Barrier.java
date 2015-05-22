@@ -15,7 +15,7 @@ public interface Barrier
 	 * @param w A wave that is to be compared to the barrier
 	 * @return true if wave hits barrier, false otherwise
 	 */
-	public boolean hits(Sprite wave);
+	public boolean hits(Wave wave);
 	
 	/**
 	 * Draws the barrier
