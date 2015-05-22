@@ -17,8 +17,8 @@ public class PhysicsMain implements ApplicationListener
 	{
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Waves";
-		cfg.width = 1280;
-		cfg.height = 960;
+		cfg.width = 960;
+		cfg.height = 720;
 		cfg.addIcon(ASSETPATH + "icon-128.png", FileType.Classpath);
 		cfg.addIcon(ASSETPATH + "icon-32.png", FileType.Classpath);
 		cfg.addIcon(ASSETPATH + "icon-16.png", FileType.Classpath);

@@ -39,7 +39,7 @@ public class MainMenuScreen implements Screen
 		{
 			ScreenManager.setScreen(new GameScreen());
 		};
-		btnPlay = new Button(640f - bg.getWidth()/2, 480f - bg.getHeight()/2 + 50, btnPlayRunnable, bg, "Play");
+		btnPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 50, btnPlayRunnable, bg, "Play");
 		
 		Runnable btnHowToPlayRunnable = () ->
 		{
@@ -52,7 +52,7 @@ public class MainMenuScreen implements Screen
 			}
 		};
 		
-		btnHowToPlay = new Button(640f - bg.getWidth()/2, 480f - bg.getHeight()/2, btnHowToPlayRunnable, bg, "How To Play");
+		btnHowToPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight()/2 - bg.getHeight()/2, btnHowToPlayRunnable, bg, "How To Play");
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class MainMenuScreen implements Screen
 		float x = Gdx.graphics.getWidth()/2 - bounds.width/2;
 		float y = Gdx.graphics.getHeight()*2/3 + bounds.height/2 + 85;
 		batch.begin();
-		batch.draw(new Texture(PhysicsMain.ASSETPATH + "mainbackground.png"), 0, 0);
+		batch.draw(new Texture(PhysicsMain.ASSETPATH + "mainbackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		font.draw(batch, text, x, y);
 		btnPlay.draw(batch);
 		btnHowToPlay.draw(batch);
