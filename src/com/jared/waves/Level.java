@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.jared.waves.screen.Screen;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
@@ -39,7 +40,6 @@ public class Level
 	{
 		wave.rotateWave((float)Math.toDegrees(Math.atan(Math.abs(y/(double)x))));
 		translateWave();
-		Gdx.graphics.requestRendering();
 		Gdx.app.log("DEBUG", "FIRE");
 		Gdx.app.log("DEBUG", "Mouse x: " + x + ", Mouse y: " + y);
 		Gdx.app.log("DEBUG", "Angle: " + (float)Math.toDegrees(Math.atan(y/(double)x)));
@@ -49,11 +49,10 @@ public class Level
 	{
 		batch.draw(background, 0, 0);
 		
+		ShapeRenderer s = new ShapeRenderer();
+		
 		for(int i = 0; i < barriers.size(); i++)
-//			if(barriers.get(i).getChangedAngle() == 0)
-				barriers.get(i).draw(batch);
-//			else
-//				barriers.get(i)
+			barriers.get(i).draw(batch);
 		wave.draw(batch);
 	}
 	

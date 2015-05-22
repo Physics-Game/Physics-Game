@@ -36,15 +36,13 @@ public class Wave
 	public Wave(Sprite s)
 	{
 		this.s = s;
-		wave = new Vector2(1, 0);
+		wave = new Vector2(3, 0);
 		x = 0;
 		y = 0;
 	}
 	
 	public void rotateWave(float degrees)
 	{
-		wave.setAngle(98);
-		System.out.println(wave);
 		wave.setAngle(degrees);
 		s.setRotation(degrees);
 	}
@@ -71,14 +69,9 @@ public class Wave
 	
 	public void translate()
 	{
-		System.out.println(wave.angle());
-		
-		float xTrans = (float)(Math.cos(Math.toRadians((double)wave.angle())));
-		float yTrans = (float)(Math.sin(Math.toRadians((double)wave.angle())));
+		float xTrans = (float)(wave.len() * Math.cos(Math.toRadians((double)wave.angle())));
+		float yTrans = (float)(wave.len() * Math.sin(Math.toRadians((double)wave.angle())));
 
-		System.out.println(xTrans);
-		System.out.println(yTrans);
-		
 		s.translate(xTrans, yTrans);
 		
 		x = s.getX();
@@ -88,6 +81,7 @@ public class Wave
 	public void draw(SpriteBatch batch)
 	{
 		s.draw(batch);
-		Gdx.app.log("DEBUG", "X: " + x + ", Y: " + y );
+		if(!(x == 0 && y == 0))
+			Gdx.app.log("DEBUG", "X: " + x + ", Y: " + y );
 	}
 }

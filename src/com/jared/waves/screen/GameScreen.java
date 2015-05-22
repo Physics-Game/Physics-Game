@@ -101,11 +101,11 @@ public class GameScreen implements Screen
 		{
 			batch.begin();
 
-//			Gdx.app.log("DEBUG", "Rendering Level " + (levelOn + 1));
+			Gdx.app.log("DEBUG", "Rendering Level " + (levelOn + 1));
 
 			levelArray[levelOn].initialDraw(batch);
 			
-//			System.out.println("Drawing...");
+			System.out.println("Drawing...");
 			
 			if(flagInitFire)
 				levelArray[levelOn].draw(batch);
@@ -115,6 +115,7 @@ public class GameScreen implements Screen
 		}
 		else
 		{
+			flagInitFire = false;
 			levelOn++;
 		}
 	}
