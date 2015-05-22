@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.jared.waves.screen.GameScreen;
 import com.jared.waves.screen.Screen;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
@@ -59,8 +60,18 @@ public class Level
 	public void draw(SpriteBatch batch)
 	{
 		translateWave();
+		
+		if(wave.getX() > Gdx.graphics.getWidth() || wave.getY() > Gdx.graphics.getHeight())
+			reset();
 	}
 	
+	private void reset() 
+	{
+		wave = new Wave(new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png")));
+		GameScreen.flagInitFire = false;
+		Gdx.app.log("DEBUG", "Level Reset");
+	}
+
 	public boolean isDone()
 	{
 		if(wave.hitsObject(goal))

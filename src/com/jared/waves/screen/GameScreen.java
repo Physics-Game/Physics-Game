@@ -25,7 +25,7 @@ public class GameScreen implements Screen
 	public static OrthographicCamera cam;
 	public static Grid grid;
 	private SpriteBatch batch;
-	private boolean flagInitFire;
+	public static boolean flagInitFire;
 	public static Level[] levelArray;
 	public static int levelOn = 0;
 	
