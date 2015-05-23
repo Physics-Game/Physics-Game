@@ -43,7 +43,7 @@ public class Reflector implements Barrier
 
 	public boolean hits(Wave w)
 	{
-		return hitbox.intersects(new Rectangle(0, 0, (int)w.getX(),(int)w.getY()));
+		return (w.getX() >= s.getX() && w.getX() <= xMax && w.getY() >= s.getY() && w.getY() <= yMax);
 	}
 	
 	public Wave reflect(Wave w)
