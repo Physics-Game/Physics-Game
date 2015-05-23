@@ -12,8 +12,8 @@ import com.jared.waves.units.Wave;
 
 public class Reflector implements Barrier
 {
+	private Rectangle hitbox;
 	private Sprite s;
-	private float xMax, yMax, width , height;
 	private Texture background;
 	private double degrees;
 	private float anglePerp;
@@ -22,6 +22,7 @@ public class Reflector implements Barrier
 	
 	public Reflector(int x, int y, int width, int height, float ang)
 	{
+		hitbox = new Rectangle(x,y,width,height);
 		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png"));
 		s = new Sprite(background);
 		
@@ -29,10 +30,6 @@ public class Reflector implements Barrier
 		
 		s.setX(x);
 		s.setY(y);
-		this.width = width;
-		this.height = height;
-		xMax = width + x;
-		yMax = height + y;
 		
 		degrees = ang;
 		anglePerp = (90 + ang) % 360;
@@ -43,7 +40,7 @@ public class Reflector implements Barrier
 
 	public boolean hits(Wave w)
 	{
-		return (w.getX() >= s.getX() - width/2 && w.getX() <= xMax && w.getY() >= s.getY() - height/2 && w.getY() <= yMax);
+		return hitbox.intersects(new Rectangle(0, 0, (int)w.getX(),(int)w.getY()));
 	}
 	
 	public Wave reflect(Wave w)
@@ -51,8 +48,6 @@ public class Reflector implements Barrier
 		Vector2 waveVector = w.getVector();
 		
 		System.out.println(perpendicular.angle(waveVector));
-		
-		w.rotateWave(perpendicular.angle(waveVector));
 		
 		return w;
 	}
