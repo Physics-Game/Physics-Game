@@ -59,7 +59,7 @@ public class Level
 	{
 		translateWave();
 		
-		if(wave.getX() > Gdx.graphics.getWidth() || wave.getY() > Gdx.graphics.getHeight())
+		if(wave.getX() > Gdx.graphics.getWidth() || wave.getY() > Gdx.graphics.getHeight() || wave.getY() < 0 || wave.getX() < 0)
 			reset();
 	}
 	
