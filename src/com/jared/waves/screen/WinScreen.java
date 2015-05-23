@@ -34,6 +34,7 @@ public class WinScreen implements Screen
 		Runnable mainMenu = () ->
 		{
 			ScreenManager.setScreen(new MainMenuScreen());
+			GameScreen.levelOn = 0;
 		};
 		
 		btnMainMenu = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, mainMenu, bg, "Main Menu");	

@@ -65,12 +65,12 @@ public class Wave
 				thing = b.getClass().getSimpleName();
 			
 			if(thing.equals("Reflector"))
-				return 1;
+				return i;
 			if(thing.equals("Refractor"))
-				return 2;
+				return i;
 		}
 		
-		return 0;
+		return -1;
 	}
 	
 	public Vector2 getVector()

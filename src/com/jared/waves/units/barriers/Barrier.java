@@ -31,4 +31,6 @@ public interface Barrier
 	 * @param height New height of the screen.
 	 */
 	void resize(int width, int height);
+	
+	public int barrierID();
 }
