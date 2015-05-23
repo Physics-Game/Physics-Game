@@ -104,9 +104,12 @@ public class Level
 			{
 				for(int i = 0; i < barriers.size(); i++)
 				{
-					Reflector r = (Reflector) barriers.get(i);
+					if(barriers.get(i).getClass().getSimpleName().equals("Reflector"))
+					{
+						Reflector r = (Reflector) barriers.get(i);
 						if(r.hits(wave))
 							r.reflect(wave);
+					}
 				}
 			}
 			case 2:

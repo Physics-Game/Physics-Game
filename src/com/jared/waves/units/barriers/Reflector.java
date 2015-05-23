@@ -1,9 +1,10 @@
 package com.jared.waves.units.barriers;
 
+import java.awt.Rectangle;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.jared.waves.PhysicsMain;
 import com.jared.waves.screen.GameScreen;
@@ -19,7 +20,7 @@ public class Reflector implements Barrier
 	private boolean oneRotate;
 	private Vector2 perpendicular;
 	
-	public Reflector(float x, float y, float width, float height, float ang)
+	public Reflector(int x, int y, int width, int height, float ang)
 	{
 		hitbox = new Rectangle(x,y,width,height);
 		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png"));
@@ -39,7 +40,7 @@ public class Reflector implements Barrier
 
 	public boolean hits(Wave w)
 	{
-		return hitbox.contains(w.getVector());
+		return hitbox.intersects(new Rectangle(0, 0, (int)w.getX(),(int)w.getY()));
 	}
 	
 	public Wave reflect(Wave w)
