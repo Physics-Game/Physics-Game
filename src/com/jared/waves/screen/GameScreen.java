@@ -91,6 +91,7 @@ public class GameScreen implements Screen
 	public void render()
 	{
 		batch.setProjectionMatrix(cam.combined);
+		
 		if(levelOn < levelArray.length && !levelArray[levelOn].isDone())
 		{
 			batch.begin();

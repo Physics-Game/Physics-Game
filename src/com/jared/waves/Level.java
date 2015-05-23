@@ -94,10 +94,28 @@ public class Level
 	
 	public void checkForHits()
 	{
-		int i = wave.hits(barriers);
-	
-		if(i > 0)
-			if(barriers.get(i).barrierID() == 1)
-				((Reflector)barriers.get(i)).reflect(wave);
+		switch(wave.hits(barriers))
+		{
+			case 0:
+			{
+				break;
+			}
+			case 1:
+			{
+				for(int i = 0; i < barriers.size(); i++)
+				{
+					if(barriers.get(i).getClass().getSimpleName().equals("Reflector"))
+					{
+						Reflector r = (Reflector) barriers.get(i);
+						if(r.hits(wave))
+							r.reflect(wave);
+					}
+				}
+			}
+			case 2:
+			{
+				
+			}
+		}
 	}
 }
