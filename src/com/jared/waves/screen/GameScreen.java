@@ -95,6 +95,7 @@ public class GameScreen implements Screen
 		if(levelOn < levelArray.length && !levelArray[levelOn].isDone())
 		{
 			batch.begin();
+			
 			Level l = levelArray[levelOn];
 			
 			l.initialDraw(batch);

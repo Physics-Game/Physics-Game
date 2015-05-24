@@ -16,7 +16,7 @@ import com.jared.waves.widget.Button;
 
 public class InBetweenScreen implements Screen
 {
-	private Button btnNextLevel, btnMainMenu;
+	private Button btnNextLevel, btnRedoLevel, btnExitGame;
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	private SpriteBatch batch;
 	private BitmapFont font;
@@ -36,13 +36,20 @@ public class InBetweenScreen implements Screen
 			ScreenManager.setScreen(new GameScreen());
 		};
 		
-		Runnable mainMenu = () ->
+		Runnable redoLevel = () ->
 		{
-			ScreenManager.setScreen(new MainMenuScreen());
+			GameScreen.levelOn--;
+			ScreenManager.setScreen(new GameScreen());
 		};
 		
-		btnNextLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 50, nextLevel, bg, "Next Level");
-		btnMainMenu = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2, mainMenu, bg, "Main Menu");	
+		Runnable exitGame = () ->
+		{
+			Gdx.app.exit();
+		};
+		
+		btnNextLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, nextLevel, bg, "Next Level");
+		btnRedoLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 30, redoLevel, bg, "Redo Level");
+		btnExitGame = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 - 20, exitGame, bg, "Exit Game");	
 	}
 
 	@Override
@@ -56,7 +63,8 @@ public class InBetweenScreen implements Screen
 		batch.draw(new Texture(PhysicsMain.ASSETPATH + "background/mainBackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		font.draw(batch, text, x, y);
 		btnNextLevel.draw(batch);
-		btnMainMenu.draw(batch);
+		btnRedoLevel.draw(batch);
+		btnExitGame.draw(batch);
 		batch.end();
 	}
 
@@ -106,8 +114,10 @@ public class InBetweenScreen implements Screen
 			{
 				if(btnNextLevel.contains(screenX, screenY))
 					btnNextLevel.handleClick(button);
-				else if(btnMainMenu.contains(screenX, screenY))
-					btnMainMenu.handleClick(button);
+				else if(btnExitGame.contains(screenX, screenY))
+					btnExitGame.handleClick(button);
+				else if(btnRedoLevel.contains(screenX, screenY))
+					btnRedoLevel.handleClick(button);
 				return true;
 			}
 			return false;

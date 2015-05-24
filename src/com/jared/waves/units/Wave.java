@@ -20,11 +20,12 @@ public class Wave
 	
 	public Wave()
 	{
-		wave = new Vector2();
-		wave.setLength(1);
+		wave = new Vector2(5, 0);
+		wave.setLength(5);
 		x = 0;
 		y = 0;
-		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png"));
+		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave2.png"));
+		s = new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave2.png"));
 	}	
 	
 	public Wave(float xPos, float yPos)
@@ -32,15 +33,7 @@ public class Wave
 		wave = new Vector2(xPos, yPos);
 		x = xPos;
 		y = yPos;
-		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png"));
-	}
-	
-	public Wave(Sprite s)
-	{
-		this.s = s;
-		wave = new Vector2(5, 0);
-		x = 0;
-		y = 0;
+		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave2.png"));
 	}
 	
 	public void rotateWave(float degrees)

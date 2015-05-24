@@ -24,7 +24,7 @@ public class Level
 	{
 		background = new Texture(PhysicsMain.ASSETPATH + "background/levelBackground.png");
 		barriers = new ArrayList<Barrier>();
-		wave = new Wave(new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png")));
+		wave = new Wave();
 	}
 	
 	public void createGoal(Goal g)
@@ -65,7 +65,7 @@ public class Level
 	
 	private void reset() 
 	{
-		wave = new Wave(new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave.png")));
+		wave = new Wave();
 		GameScreen.flagInitFire = false;
 		Gdx.app.log("DEBUG", "Level Reset");
 	}

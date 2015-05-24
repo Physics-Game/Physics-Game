@@ -19,6 +19,7 @@ public class Reflector implements Barrier
 	private float anglePerp;
 	private boolean oneRotate;
 	private Vector2 perpendicular;
+	private boolean usedReflect;
 	
 	public Reflector(int x, int y, int width, int height, float ang)
 	{
@@ -36,19 +37,37 @@ public class Reflector implements Barrier
 		perpendicular = new Vector2(1,0);
 		perpendicular.setAngle(anglePerp);
 		perpendicular.setLength(1);
+		
+		usedReflect = false;
 	}
 
 	public boolean hits(Wave w)
 	{
-		return hitbox.intersects(new Rectangle(0, 0, (int)w.getX(),(int)w.getY()));
+		return hitbox.intersects(new Rectangle(0, 0, (int)w.getX(),(int)w.getY())) && (Math.abs(w.getX() - hitbox.x) < hitbox.width) && (Math.abs(w.getY() - hitbox.y) < hitbox.height);
 	}
 	
 	public Wave reflect(Wave w)
-	{
-		Vector2 waveVector = w.getVector();
+	{/*
+		if(!usedReflect)
+		{
+			Vector2 waveVector = w.getVector();
+			float angle = waveVector.angle();
+			//angle += degrees;
+			float thetaI = perpendicular.angle(waveVector);
+			if(thetaI > 90)
+				thetaI = 180 - thetaI;
+			waveVector.rotate(angle);
+			w.rotateWave(180 - Math.abs(perpendicular.angle(waveVector)));
+			//take angle wave is being shot and add the tilt angle. that is angle of incidence relative to the normal
+			
+			System.out.println(w.getX() + " " + w.getY());
+			
+			//System.out.println(perpendicular.angle(waveVector));
+			
+			usedReflect = true;
+		}
 		
-		System.out.println(perpendicular.angle(waveVector));
-		
+		*/
 		return w;
 	}
 	
