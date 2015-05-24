@@ -36,10 +36,7 @@ public class Reflector implements Barrier
 		yMax = height + y;
 		
 		degrees = ang;
-		anglePerp = (90 + ang) % 360;
 		perpendicular = new Vector2(1,0);
-		perpendicular.setAngle(anglePerp);
-		perpendicular.setLength(1);
 	}
 
 	public boolean hits(Wave w)
@@ -52,6 +49,17 @@ public class Reflector implements Barrier
 		Vector2 waveVector = w.getVector();
 		
 		System.out.println(perpendicular.angle(waveVector));
+		
+		if(degrees == 0)
+			if(w.getX() >= s.getX() - width/2 && w.getX() <= xMax && w.getY() > s.getY())
+				perpendicular.setAngle((float) degrees + 90);
+			else if(w.getX() >= s.getX() - width/2 && w.getX() <= xMax && w.getY() < s.getY())
+				perpendicular.setAngle((float) degrees - 90);
+			else if(w.getY() >= s.getY() - height/2 && w.getY() <= yMax && w.getX() > s.getX())
+				perpendicular.setAngle((float) degrees);
+			else
+				perpendicular.setAngle((float) degrees + 180);
+
 		
 		w.rotateWave(perpendicular.angle(waveVector));
 		
