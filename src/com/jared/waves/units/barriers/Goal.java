@@ -53,6 +53,7 @@ public class Goal implements Barrier
 
 	@Override
 	public int barrierID() {
-		return 0;
+		// TODO Auto-generated method stub
+		return 4;
 	}
 }
