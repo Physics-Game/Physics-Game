@@ -58,10 +58,7 @@ public class Level
 	public void draw(SpriteBatch batch)
 	{
 		translateWave();
-		
-		for(int i = 0; i < barriers.size(); i++)
-			barriers.get(i).used = false;
-		
+			
 		if(wave.getX() > Gdx.graphics.getWidth() || wave.getY() > Gdx.graphics.getHeight() || wave.getY() < 0 || wave.getX() < 0)
 			reset();
 	}
@@ -70,6 +67,8 @@ public class Level
 	{
 		wave = new Wave();
 		GameScreen.flagInitFire = false;
+		for(int i = 0; i < barriers.size(); i++)
+			barriers.get(i).used = false;
 		Gdx.app.log("DEBUG", "Level Reset");
 	}
 
