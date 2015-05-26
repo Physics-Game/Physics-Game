@@ -67,7 +67,11 @@ public class Level
 		wave = new Wave();
 		GameScreen.flagInitFire = false;
 		for(int i = 0; i < barriers.size(); i++)
+		{
 			barriers.get(i).used = false;
+			barriers.get(i).resetBackground();
+		}
+
 		Gdx.app.log("DEBUG", "Level Reset");
 	}
 
