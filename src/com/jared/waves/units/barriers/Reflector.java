@@ -47,27 +47,42 @@ public class Reflector implements Barrier
 	}
 	
 	public Wave reflect(Wave w)
-	{/*
+	{
 		if(!usedReflect)
 		{
 			Vector2 waveVector = w.getVector();
-			float angle = waveVector.angle();
-			//angle += degrees;
-			float thetaI = perpendicular.angle(waveVector);
+			
+			float thetaI = Math.abs(perpendicular.angle(waveVector));
 			if(thetaI > 90)
 				thetaI = 180 - thetaI;
-			waveVector.rotate(angle);
-			w.rotateWave(180 - Math.abs(perpendicular.angle(waveVector)));
+			
+			
+			
+			boolean flip = false;
+			if(thetaI < 90)
+			{
+				perpendicular.setAngle((perpendicular.angle() + 180) % 360 );
+				flip = true;
+			}
+			
+			
+			float thetaR = thetaI + perpendicular.angle();
+			
+			
+			
+			System.out.println("Angle of wave: " + waveVector.angle() +  " Angle of perpendicular: " + perpendicular.angle() + " Perp.angle: " + perpendicular.angle(waveVector) + " ThetaI: " + thetaI + " ThetaR: " + thetaR);
 			//take angle wave is being shot and add the tilt angle. that is angle of incidence relative to the normal
 			
-			System.out.println(w.getX() + " " + w.getY());
+			w.rotateWave(thetaR);
 			
+			if(flip)
+				perpendicular.setAngle((perpendicular.angle() + 180) % 360);
 			//System.out.println(perpendicular.angle(waveVector));
 			
 			usedReflect = true;
 		}
 		
-		*/
+		
 		return w;
 	}
 	
