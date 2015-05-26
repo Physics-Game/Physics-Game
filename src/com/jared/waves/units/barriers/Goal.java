@@ -56,4 +56,9 @@ public class Goal extends Barrier
 		// TODO Auto-generated method stub
 		return 4;
 	}
+
+	@Override
+	public void resetBackground() {
+		
+	}
 }

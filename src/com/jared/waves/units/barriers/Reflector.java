@@ -62,6 +62,8 @@ public class Reflector extends Barrier
 			w.rotateWave(thetaR);
 			
 			used = true;
+			
+			s.setTexture(new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector Used.png"));
 		}
 	}
 	
@@ -88,8 +90,18 @@ public class Reflector extends Barrier
 		
 	}
 
+	public Sprite getSprite()
+	{
+		return s;
+	}
+	
 	@Override
 	public int barrierID() {
 		return 1;
+	}
+
+	@Override
+	public void resetBackground() {
+		s.setTexture(background);
 	}
 }

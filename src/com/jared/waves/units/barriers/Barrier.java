@@ -1,5 +1,6 @@
 package com.jared.waves.units.barriers;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jared.waves.units.Wave;
@@ -33,6 +34,8 @@ public abstract class Barrier
 	 * @param height New height of the screen.
 	 */
 	public abstract void resize(int width, int height);
+	
+	public abstract void resetBackground();
 	
 	public abstract int barrierID();
 }
