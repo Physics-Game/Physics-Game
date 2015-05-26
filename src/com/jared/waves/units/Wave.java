@@ -71,6 +71,11 @@ public class Wave
 		return wave;
 	}
 	
+	public void setVector(Vector2 v)
+	{
+		wave = new Vector2(v);
+	}
+	
 	public float getX()
 	{
 		return x;
