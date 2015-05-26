@@ -8,7 +8,7 @@ import com.jared.waves.PhysicsMain;
 import com.jared.waves.screen.GameScreen;
 import com.jared.waves.units.Wave;
 
-public class Goal implements Barrier
+public class Goal extends Barrier
 {
 	private Rectangle hitbox;
 	private Texture background;

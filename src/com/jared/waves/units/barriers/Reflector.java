@@ -10,16 +10,16 @@ import com.jared.waves.PhysicsMain;
 import com.jared.waves.screen.GameScreen;
 import com.jared.waves.units.Wave;
 
-public class Reflector implements Barrier
+public class Reflector extends Barrier
 {
 	private Rectangle hitbox;
+	private float xMax, yMax, width , height;
 	private Sprite s;
 	private Texture background;
 	private double degrees;
 	private float anglePerp;
 	private boolean oneRotate;
 	private Vector2 perpendicular;
-	private boolean usedReflect;
 	
 	public Reflector(int x, int y, int width, int height, float ang)
 	{
@@ -28,6 +28,11 @@ public class Reflector implements Barrier
 		s = new Sprite(background);
 		
 		oneRotate = false;
+		
+		this.width = width;
+				this.height = height;
+				xMax = width + x;
+				yMax = height + y;
 		
 		s.setX(x);
 		s.setY(y);
@@ -38,52 +43,26 @@ public class Reflector implements Barrier
 		perpendicular.setAngle(anglePerp);
 		perpendicular.setLength(1);
 		
-		usedReflect = false;
+		used = false;
 	}
 
 	public boolean hits(Wave w)
 	{
-		return hitbox.intersects(new Rectangle(0, 0, (int)w.getX(),(int)w.getY())) && (Math.abs(w.getX() - hitbox.x) < hitbox.width) && (Math.abs(w.getY() - hitbox.y) < hitbox.height);
+		return (w.getX() >= s.getX() - width/2 && w.getX() <= xMax && w.getY() >= s.getY() - height/2 && w.getY() <= yMax);
 	}
 	
-	public Wave reflect(Wave w)
+	public void reflect(Wave w)
 	{
-		if(!usedReflect)
+		if(!super.used)
 		{
 			Vector2 waveVector = w.getVector();
 			
-			float thetaI = Math.abs(perpendicular.angle(waveVector));
-			if(thetaI > 90)
-				thetaI = 180 - thetaI;
-			
-			
-			
-			boolean flip = false;
-			if(thetaI < 90)
-			{
-				perpendicular.setAngle((perpendicular.angle() + 180) % 360 );
-				flip = true;
-			}
-			
-			
-			float thetaR = thetaI + perpendicular.angle();
-			
-			
-			
-			System.out.println("Angle of wave: " + waveVector.angle() +  " Angle of perpendicular: " + perpendicular.angle() + " Perp.angle: " + perpendicular.angle(waveVector) + " ThetaI: " + thetaI + " ThetaR: " + thetaR);
-			//take angle wave is being shot and add the tilt angle. that is angle of incidence relative to the normal
-			
+			float thetaR = (float) (2 * degrees - waveVector.angle());
+		
 			w.rotateWave(thetaR);
 			
-			if(flip)
-				perpendicular.setAngle((perpendicular.angle() + 180) % 360);
-			//System.out.println(perpendicular.angle(waveVector));
-			
-			usedReflect = true;
+			used = true;
 		}
-		
-		
-		return w;
 	}
 	
 	@Override
