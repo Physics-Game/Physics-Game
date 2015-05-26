@@ -164,7 +164,7 @@ public class GameScreen implements Screen
 			{
 				if(!flagInitFire)
 				{
-					levelArray[levelOn].initFire(ScreenManager.getScreen(), screenX, Gdx.graphics.getHeight() - screenY);
+					levelArray[levelOn].initFire(screenX, Gdx.graphics.getHeight() - screenY);
 					flagInitFire = true;
 				}
 				return true;
