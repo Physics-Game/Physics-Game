@@ -63,7 +63,7 @@ public class MainMenuScreen implements Screen
 		float x = Gdx.graphics.getWidth()/2 - bounds.width/2;
 		float y = Gdx.graphics.getHeight()*2/3 + bounds.height/2 + 85;
 		batch.begin();
-		batch.draw(new Texture(PhysicsMain.ASSETPATH + "background/mainbackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		batch.draw(new Texture(PhysicsMain.ASSETPATH + "background/mainBackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		font.draw(batch, text, x, y);
 		btnPlay.draw(batch);
 		btnHowToPlay.draw(batch);

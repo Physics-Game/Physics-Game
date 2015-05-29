@@ -1,7 +1,5 @@
 package com.jared.waves.units.barriers;
 
-import java.awt.Rectangle;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,7 +10,6 @@ import com.jared.waves.units.Wave;
 
 public class Reflector extends Barrier
 {
-	private Rectangle hitbox;
 	private float xMax, yMax, width , height;
 	private Sprite s;
 	private Texture background;
@@ -22,8 +19,7 @@ public class Reflector extends Barrier
 	private Vector2 perpendicular;
 	
 	public Reflector(int x, int y, int width, int height, float ang)
-	{
-		hitbox = new Rectangle(x,y,width,height);
+	{	
 		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png"));
 		s = new Sprite(background);
 		
