@@ -12,6 +12,7 @@ import com.jared.waves.units.Wave;
 
 public class Reflector extends Barrier
 {
+	private final static int[] xs = {SpriteBatch.X1, SpriteBatch.X2, SpriteBatch.X3, SpriteBatch.X4};;
 	private Rectangle hitbox;
 	private float xMax, yMax, width , height;
 	private Sprite s;
@@ -48,9 +49,49 @@ public class Reflector extends Barrier
 
 	public boolean hits(Wave w)
 	{
-		return (w.getX() >= s.getX() - width/2 && w.getX() <= xMax && w.getY() >= s.getY() - height/2 && w.getY() <= yMax);
+//		Vector2[] axesShape1 = getAxes(w.getSprite());
+//		Vector2[] axesShape2 = getAxes(s);
+//		
+//		for(int i = 0; i < axesShape1.length; i++)
+//		{
+//			float[] x = project(w.getSprite(), axesShape1[i]);
+//			float[] x2 = project(s, axesShape1[i]);
+//			
+//			if(!(x[1] > x2[0] || x2[0] > x[1]))
+//				return false;
+//		}
+//		
+//		for(int i = 0; i < axesShape1.length; i++)
+//		{
+//			float[] x = project(w.getSprite(), axesShape2[i]);
+//			float[] x2 = project(s, axesShape2[i]);
+//			
+//			if(!(x[1] > x2[0] || x2[0] > x[1]))
+//				return false;
+//		}
+//		
+//		System.out.println(true);
+//		return true;
+		
+		return false;
 	}
 	
+//	private float[] project(Sprite s, Vector2 axis) 
+//	{
+//		float min = axis.dot(new Vector2(s.getVertices()[xs[0]], s.getVertices()[xs[0] + 1])), max = min;
+//		for(int i = 0; i < 4; i++)
+//		{
+//			float p = axis.dot(new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]));
+//			
+//			if(p < min)
+//				min = p;
+//			else if(p > max)
+//				max = p;
+//		}
+//		System.out.println("Max: " + max + "\nMin: " + min + "\n");
+//		return new float[]{min, max};
+//	}
+
 	public void reflect(Wave w)
 	{
 		if(!super.used)
@@ -104,4 +145,19 @@ public class Reflector extends Barrier
 	public void resetBackground() {
 		s.setTexture(background);
 	}
+	
+//	private Vector2[] getAxes(Sprite s)
+//	{
+//		Vector2[] axes = new Vector2[4];
+//		
+//		for(int i = 0; i < axes.length; i++)
+//		{
+//			Vector2 p = new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]);
+//			Vector2 p2 = new Vector2(s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1]], s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1] + 1]);
+//			Vector2 edge = p.sub(p2);
+//			axes[i] = new Vector2((edge.Y.rotate(180)).add(edge.X)).nor();
+//		}
+//		
+//		return axes;
+//	}
 }
