@@ -27,14 +27,7 @@ public abstract class Barrier
 	public abstract void draw(SpriteBatch batch);
 	
 	public abstract double getChangedAngle();
-	
-	/**
-	 * Updates this barrier's position based on the new width and height of the screen.
-	 * @param width New width of the screen.
-	 * @param height New height of the screen.
-	 */
-	public abstract void resize(int width, int height);
-	
+		
 	public abstract void resetBackground();
 	
 	public abstract int barrierID();
