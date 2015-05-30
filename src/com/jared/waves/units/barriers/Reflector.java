@@ -10,7 +10,7 @@ import com.jared.waves.units.Wave;
 
 public class Reflector extends Barrier
 {
-	//private final static int[] xs = {SpriteBatch.X1, SpriteBatch.X2, SpriteBatch.X3, SpriteBatch.X4};
+	private final static int[] xs = {SpriteBatch.X1, SpriteBatch.X2, SpriteBatch.X3, SpriteBatch.X4};
 	private float xMax, yMax, width , height;
 	private Sprite s;
 	private Texture background;
@@ -45,48 +45,39 @@ public class Reflector extends Barrier
 
 	public boolean hits(Wave w)
 	{
-//		Vector2[] axesShape1 = getAxes(w.getSprite());
-//		Vector2[] axesShape2 = getAxes(s);
-//		
-//		for(int i = 0; i < axesShape1.length; i++)
-//		{
-//			float[] x = project(w.getSprite(), axesShape1[i]);
-//			float[] x2 = project(s, axesShape1[i]);
-//			
-//			if(!(x[1] > x2[0] || x2[0] > x[1]))
-//				return false;
-//		}
-//		
-//		for(int i = 0; i < axesShape1.length; i++)
-//		{
-//			float[] x = project(w.getSprite(), axesShape2[i]);
-//			float[] x2 = project(s, axesShape2[i]);
-//			
-//			if(!(x[1] > x2[0] || x2[0] > x[1]))
-//				return false;
-//		}
-//		
-//		System.out.println(true);
-//		return true;
+		Vector2[][] axesShape = {getAxes(w.getSprite()), getAxes(s)};
 		
-		return false;
+		for(int r = 0; r < axesShape.length; r++)
+			for(int i = 0; i < axesShape[0].length; i++)
+			{
+				float[] x = project(w.getSprite(), axesShape[r][i]);
+System.out.println("Compared To: \n");
+				float[] x2 = project(s, axesShape[r][i]);
+System.out.println("=======================> ");			
+				if(!((x[1] > x2[0] && x[0] < x2[1]) || (x2[1] > x[0] && x2[0] < x[1])))
+					return false;
+System.out.print(true + "\n\n");
+			}
+		
+		System.out.print(true + "\n\n");
+		return true;
 	}
 	
-//	private float[] project(Sprite s, Vector2 axis) 
-//	{
-//		float min = axis.dot(new Vector2(s.getVertices()[xs[0]], s.getVertices()[xs[0] + 1])), max = min;
-//		for(int i = 0; i < 4; i++)
-//		{
-//			float p = axis.dot(new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]));
-//			
-//			if(p < min)
-//				min = p;
-//			else if(p > max)
-//				max = p;
-//		}
-//		System.out.println("Max: " + max + "\nMin: " + min + "\n");
-//		return new float[]{min, max};
-//	}
+	private float[] project(Sprite s, Vector2 axis) 
+	{
+		float min = Float.MAX_VALUE, max = -1*Float.MAX_VALUE;
+		for(int i = 0; i < 4; i++)
+		{
+			float p = axis.dot(new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]));
+			
+			if(p < min)
+				min = p;
+			else if(p > max)
+				max = p;
+		}
+		System.out.println("Max: " + max + "\nMin: " + min + "\n");
+		return new float[]{min, max};
+	}
 
 	public void reflect(Wave w)
 	{
@@ -142,18 +133,22 @@ public class Reflector extends Barrier
 		s.setTexture(background);
 	}
 	
-//	private Vector2[] getAxes(Sprite s)
-//	{
-//		Vector2[] axes = new Vector2[4];
-//		
-//		for(int i = 0; i < axes.length; i++)
-//		{
-//			Vector2 p = new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]);
-//			Vector2 p2 = new Vector2(s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1]], s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1] + 1]);
-//			Vector2 edge = p.sub(p2);
-//			axes[i] = new Vector2((edge.Y.rotate(180)).add(edge.X)).nor();
-//		}
-//		
-//		return axes;
-//	}
+	private Vector2[] getAxes(Sprite s)
+	{
+		Vector2[] axes = new Vector2[4];
+		
+		for(int i = 0; i < axes.length; i++)
+		{
+			Vector2 p = new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]);
+			Vector2 p2 = new Vector2(s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1]], s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1] + 1]);
+			
+System.out.println(p);
+System.out.println(p2 + "\n---------------");
+			
+			Vector2 edge = p.sub(p2);
+			axes[i] = new Vector2(-1*edge.y, edge.x);
+		}
+		
+		return axes;
+	}
 }
