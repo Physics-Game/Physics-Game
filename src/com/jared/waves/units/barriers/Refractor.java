@@ -19,14 +19,14 @@ public class Refractor extends Barrier
 	private boolean deep;
 	private Vector2 perpendicular;
 	
-	public Refractor(int x, int y, int width, int height, float ang, boolean iDeep)
+	public Refractor(int x, int y, int width, int height, float ang, boolean isDeep)
 	{
-		if(iDeep)
+		if(isDeep)
 			GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/refractordeep.png"));
 		else
 			GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/refractorshallow.png"));
 		
-		deep = iDeep;
+		deep = isDeep;
 		
 		s = new Sprite(background);
 		
@@ -57,33 +57,38 @@ public class Refractor extends Barrier
 	
 	public void refract(Wave w)
 	{
-		Vector2 waveVector = w.getVector();
-		
-		if(deep)
+		if(!super.used)
 		{
-			if(waveVector.angle() > perpendicular.angle())
+			Vector2 waveVector = w.getVector();
+			
+			if(deep)
 			{
-				waveVector.setAngle(waveVector.angle() + 10);
-				waveVector.setLength(waveVector.len() + 2);
+				if(waveVector.angle() > perpendicular.angle())
+				{
+					waveVector.setAngle(waveVector.angle() + 5);
+					waveVector.setLength(waveVector.len() + 1.5f);
+				}
+				else
+				{
+					waveVector.setAngle(waveVector.angle() - 5);
+					waveVector.setLength(waveVector.len() + 1.5f);
+				}
 			}
 			else
 			{
-				waveVector.setAngle(waveVector.angle() - 10);
-				waveVector.setLength(waveVector.len() + 2);
+				if(waveVector.angle() > perpendicular.angle())
+				{
+					waveVector.setAngle(waveVector.angle() - 5);
+					waveVector.setLength(waveVector.len() - 1.5f);
+				}
+				else
+				{
+					waveVector.setAngle(waveVector.angle() + 5);
+					waveVector.setLength(waveVector.len() - 1.5f);
+				}
 			}
-		}
-		else
-		{
-			if(waveVector.angle() > perpendicular.angle())
-			{
-				waveVector.setAngle(waveVector.angle() - 10);
-				waveVector.setLength(waveVector.len() - 2);
-			}
-			else
-			{
-				waveVector.setAngle(waveVector.angle() + 10);
-				waveVector.setLength(waveVector.len() - 2);
-			}
+			
+			used = true;
 		}
 	}
 

@@ -12,6 +12,7 @@ import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
 import com.jared.waves.units.barriers.Goal;
 import com.jared.waves.units.barriers.Reflector;
+import com.jared.waves.units.barriers.Refractor;
 
 public class Level 
 {
@@ -52,12 +53,14 @@ public class Level
 		
 		for(int i = 0; i < barriers.size(); i++)
 			barriers.get(i).draw(batch);
+		
 		wave.draw(batch);
 	}
 	
 	public void draw(SpriteBatch batch)
 	{
 		translateWave();
+		
 		if(wave.getX() > Gdx.graphics.getWidth() || wave.getY() > Gdx.graphics.getHeight() || wave.getY() < 0 || wave.getX() < 0)
 			reset();
 	}
@@ -102,7 +105,18 @@ public class Level
 		int i = wave.hits(barriers);
 		
 		if(i >= 0)
+		{
 			if(barriers.get(i).barrierID() == 1)
-				((Reflector)barriers.get(i)).reflect(wave);
+			{
+				((Reflector)barriers.get(i)).reflect(wave);	
+			}
+			else
+			{
+				if((barriers.get(i).barrierID() < 4))
+				{
+					((Refractor)barriers.get(i)).refract(wave);
+				}
+			}			
+		}		
 	}
 }
