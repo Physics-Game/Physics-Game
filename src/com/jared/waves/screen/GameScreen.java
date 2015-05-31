@@ -22,7 +22,7 @@ public class GameScreen implements Screen
 
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	public static OrthographicCamera cam;
-	private static SpriteBatch batch = new SpriteBatch();
+	private SpriteBatch batch;
 	public static boolean flagInitFire;
 	public static Level[] levelArray;
 	public static int levelOn = 0;
@@ -30,6 +30,7 @@ public class GameScreen implements Screen
 	@Override
 	public void create()
 	{	
+		batch = new SpriteBatch();
 		cam = new OrthographicCamera(800, 600);
 		cam.setToOrtho(false);
 		Gdx.input.setInputProcessor(new InputHandler());
