@@ -51,19 +51,11 @@ public class Reflector extends Barrier
 			for(int i = 0; i < axesShape[0].length; i++)
 			{
 				float[] x = project(w.getSprite(), axesShape[r][i]);
-System.out.println("Compared To: \n");
 				float[] x2 = project(s, axesShape[r][i]);
-System.out.println("=======================> ");			
-				//if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
 				if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
-				{
-					System.out.print(false + "\n\n");
 					return false;
-				}
-System.out.print(true + "\n\n");
 			}
 		
-		System.out.print("It collided\n\n");
 		return true;
 	}
 	
@@ -86,7 +78,6 @@ System.out.print(true + "\n\n");
 				max = p2;
 
 		}
-		System.out.println("Max: " + max + "\nMin: " + min + "\n");
 		return new float[]{min, max};
 	}
 
@@ -146,10 +137,6 @@ System.out.print(true + "\n\n");
 		{
 			Vector2 p = new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]);
 			Vector2 p2 = new Vector2(s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1]], s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1] + 1]);
-			
-System.out.println(p);
-System.out.println(p2 + "\n---------------");
-			
 			Vector2 edge = p.sub(p2);
 			axes[i] = new Vector2(edge.y, -1*edge.x).nor();
 		}

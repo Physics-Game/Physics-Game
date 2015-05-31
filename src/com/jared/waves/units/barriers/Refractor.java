@@ -10,6 +10,7 @@ import com.jared.waves.units.Wave;
 
 public class Refractor extends Barrier 
 {
+	private final static int[] xs = {SpriteBatch.X1, SpriteBatch.X2, SpriteBatch.X3, SpriteBatch.X4};
 	private float xMax, yMax, width , height;
 	private Sprite s;
 	private Texture background;
@@ -50,9 +51,20 @@ public class Refractor extends Barrier
 	}
 	
 	@Override
-	public boolean hits(Wave w) 
+	public boolean hits(Wave w)
 	{
-		return (w.getX() >= s.getX() - width/2 && w.getX() <= xMax && w.getY() >= s.getY() - height/2 && w.getY() <= yMax);
+		Vector2[][] axesShape = {getAxes(w.getSprite()), getAxes(s)};
+		
+		for(int r = 0; r < axesShape.length; r++)
+			for(int i = 0; i < axesShape[0].length; i++)
+			{
+				float[] x = project(w.getSprite(), axesShape[r][i]);
+				float[] x2 = project(s, axesShape[r][i]);
+				if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
+					return false;
+			}
+		
+		return true;
 	}
 	
 	public void refract(Wave w)
@@ -124,4 +136,42 @@ public class Refractor extends Barrier
 		
 	}
 
+	private Vector2[] getAxes(Sprite s)
+	{
+		Vector2[] axes = new Vector2[4];
+		
+		for(int i = 0; i < axes.length; i++)
+		{
+			Vector2 p = new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]);
+			Vector2 p2 = new Vector2(s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1]], s.getVertices()[xs[i + 1 == axes.length ? 0 : i + 1] + 1]);
+			Vector2 edge = p.sub(p2);
+			axes[i] = new Vector2(edge.y, -1*edge.x).nor();
+		}
+		
+		return axes;
+	}
+	
+	private float[] project(Sprite s, Vector2 axis) 
+	{
+		float min = Float.MAX_VALUE, max = -1*Float.MAX_VALUE;
+		for(int i = 0; i < 4; i++)
+		{
+			float p = Math.abs(axis.dot(new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1])));
+			float p2 = axis.dot(new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]));
+			
+			if(p < min)
+				min = p;
+			else if(p > max)
+				max = p;
+			
+			if(p2 < min)
+				min = p2;
+			else if(p2 > max)
+				max = p2;
+
+		}
+		return new float[]{min, max};
+	}
+
+	
 }
