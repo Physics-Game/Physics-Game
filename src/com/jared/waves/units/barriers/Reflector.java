@@ -54,8 +54,12 @@ public class Reflector extends Barrier
 System.out.println("Compared To: \n");
 				float[] x2 = project(s, axesShape[r][i]);
 System.out.println("=======================> ");			
-				if(!((x[1] > x2[0] && x[0] < x2[1]) || (x2[1] > x[0] && x2[0] < x[1])))
+				//if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
+				if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
+				{
+					System.out.print(false + "\n\n");
 					return false;
+				}
 System.out.print(true + "\n\n");
 			}
 		
@@ -68,12 +72,19 @@ System.out.print(true + "\n\n");
 		float min = Float.MAX_VALUE, max = -1*Float.MAX_VALUE;
 		for(int i = 0; i < 4; i++)
 		{
-			float p = axis.dot(new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]));
+			float p = Math.abs(axis.dot(new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1])));
+			float p2 = axis.dot(new Vector2(s.getVertices()[xs[i]], s.getVertices()[xs[i] + 1]));
 			
 			if(p < min)
 				min = p;
 			else if(p > max)
 				max = p;
+			
+			if(p2 < min)
+				min = p2;
+			else if(p2 > max)
+				max = p2;
+
 		}
 		System.out.println("Max: " + max + "\nMin: " + min + "\n");
 		return new float[]{min, max};
