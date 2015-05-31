@@ -59,7 +59,7 @@ System.out.println("=======================> ");
 System.out.print(true + "\n\n");
 			}
 		
-		System.out.print(true + "\n\n");
+		System.out.print("It collided\n\n");
 		return true;
 	}
 	
@@ -146,7 +146,7 @@ System.out.println(p);
 System.out.println(p2 + "\n---------------");
 			
 			Vector2 edge = p.sub(p2);
-			axes[i] = new Vector2(-1*edge.y, edge.x);
+			axes[i] = new Vector2(edge.y, -1*edge.x).nor();
 		}
 		
 		return axes;
