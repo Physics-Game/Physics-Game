@@ -91,7 +91,7 @@ System.out.print(true + "\n\n");
 			
 			used = true;
 			
-			s.setTexture(new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector Used.png"));
+			s.setTexture(new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflectorUsed.png"));
 		}
 	}
 	
@@ -110,12 +110,6 @@ System.out.print(true + "\n\n");
 	public double getChangedAngle()
 	{
 		return anglePerp;
-	}
-	
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public Sprite getSprite()

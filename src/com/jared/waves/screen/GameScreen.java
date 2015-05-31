@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.jared.waves.Level;
 import com.jared.waves.units.barriers.Goal;
 import com.jared.waves.units.barriers.Reflector;
+import com.jared.waves.units.barriers.Refractor;
 
 public class GameScreen implements Screen
 {
@@ -69,10 +70,12 @@ public class GameScreen implements Screen
 					}
 					case 2:
 					{
+						levelArray[level].addBarrier(new Refractor(x,y,100,33,theta,true));
 						break;
 					}
 					case 3:
 					{
+						levelArray[level].addBarrier(new Refractor(x,y,100,33,theta,false));
 						break;
 					}
 					case 4:

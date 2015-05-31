@@ -59,8 +59,9 @@ public class Wave
 			
 			if(thing.equals("Reflector"))
 				return i;
-			else if(thing.equals("Refractor"))
-				return i;
+			else 
+				if(thing.equals("Refractor"))
+					return i;
 		}
 		
 		return -1;

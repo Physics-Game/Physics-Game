@@ -37,13 +37,6 @@ public class Goal extends Barrier
 	{
 		batch.draw(background, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 	}
-	
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public double getChangedAngle() {
