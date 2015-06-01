@@ -33,6 +33,7 @@ public class WinScreen implements Screen
 		
 		Runnable mainMenu = () ->
 		{
+			GameScreen.levelOn = 0;
 			ScreenManager.setScreen(new MainMenuScreen());
 		};
 		

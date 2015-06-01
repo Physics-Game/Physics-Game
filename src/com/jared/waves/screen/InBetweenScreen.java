@@ -49,7 +49,7 @@ public class InBetweenScreen implements Screen
 		};
 		
 		btnNextLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, nextLevel, bg, "Next Level");
-		btnRedoLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2, redo, bg, "Redo Level");
+		btnRedoLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 25, redo, bg, "Redo Level");
 		btnMainMenu = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 - 20, mainMenu, bg, "Main Menu");	
 	}
 
