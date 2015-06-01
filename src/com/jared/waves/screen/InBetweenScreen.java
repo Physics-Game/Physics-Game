@@ -1,7 +1,6 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Buttons;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.TextBounds;
 import com.badlogic.gdx.utils.Disposable;
 import com.jared.waves.PhysicsMain;
 import com.jared.waves.widget.Button;
-
 
 public class InBetweenScreen implements Screen
 {

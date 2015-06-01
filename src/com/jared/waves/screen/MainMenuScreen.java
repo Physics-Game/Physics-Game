@@ -21,7 +21,7 @@ public class MainMenuScreen implements Screen
 {
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	
-	private Button btnPlay, btnHowToPlay;
+	private Button btnPlay, btnHowToPlay, btnExit;
 	private SpriteBatch batch;
 	private BitmapFont font;
 	
@@ -39,7 +39,7 @@ public class MainMenuScreen implements Screen
 			ScreenManager.setScreen(new GameScreen());
 			batch.dispose();
 		};
-		btnPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 50, btnPlayRunnable, bg, "Play");
+		btnPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, btnPlayRunnable, bg, "Play");
 		
 		Runnable btnHowToPlayRunnable = () ->
 		{
@@ -52,7 +52,15 @@ public class MainMenuScreen implements Screen
 			}
 		};
 		
-		btnHowToPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight()/2 - bg.getHeight()/2, btnHowToPlayRunnable, bg, "How To Play");
+		btnHowToPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight()/2 - bg.getHeight()/2 + 25, btnHowToPlayRunnable, bg, "How To Play");
+		
+		Runnable exitGame = () ->
+		{
+			Gdx.app.log("INFO", "Game Closed");
+			Gdx.app.exit();
+		};
+
+		btnExit = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 - 20, exitGame, bg, "Exit Game");
 	}
 
 	@Override
@@ -67,6 +75,7 @@ public class MainMenuScreen implements Screen
 		font.draw(batch, text, x, y);
 		btnPlay.draw(batch);
 		btnHowToPlay.draw(batch);
+		btnExit.draw(batch);
 		batch.end();
 	}
 
@@ -123,6 +132,8 @@ public class MainMenuScreen implements Screen
 					btnPlay.handleClick(button);
 				else if(btnHowToPlay.contains(screenX, screenY))
 					btnHowToPlay.handleClick(button);
+				else if(btnExit.contains(screenX, screenY))
+					btnExit.handleClick(button);
 				return true;
 			}
 			return false;

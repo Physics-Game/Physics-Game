@@ -1,7 +1,6 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Buttons;
@@ -13,10 +12,9 @@ import com.badlogic.gdx.utils.Disposable;
 import com.jared.waves.PhysicsMain;
 import com.jared.waves.widget.Button;
 
-
 public class WinScreen implements Screen
 {
-	private Button btnMainMenu;
+	private Button btnMainMenu, btnExit;
 	public static ArrayList<Disposable> content = new ArrayList<>();
 	private SpriteBatch batch;
 	private BitmapFont font;
@@ -37,7 +35,14 @@ public class WinScreen implements Screen
 			ScreenManager.setScreen(new MainMenuScreen());
 		};
 		
+		Runnable exitGame = () ->
+		{
+			Gdx.app.log("INFO", "Game Closed");
+			Gdx.app.exit();
+		};
+		
 		btnMainMenu = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, mainMenu, bg, "Main Menu");	
+		btnExit = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 25, exitGame, bg, "Exit Game");
 	}
 
 	@Override
@@ -51,6 +56,7 @@ public class WinScreen implements Screen
 		batch.draw(new Texture(PhysicsMain.ASSETPATH + "background/mainBackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		font.draw(batch, text, x, y);
 		btnMainMenu.draw(batch);
+		btnExit.draw(batch);
 		batch.end();
 	}
 
@@ -104,6 +110,8 @@ public class WinScreen implements Screen
 			{
 				if(btnMainMenu.contains(screenX, screenY))
 					btnMainMenu.handleClick(button);
+				else if(btnExit.contains(screenX, screenY))
+					btnExit.handleClick(button);
 				return true;
 			}
 			return false;

@@ -19,6 +19,7 @@ public class Refractor extends Barrier
 	private boolean oneRotate;
 	private boolean deep;
 	private Vector2 perpendicular;
+	private final float index = 10, speedIndex = 1.5f;
 	
 	public Refractor(int x, int y, int width, int height, float ang, boolean isDeep)
 	{
@@ -77,26 +78,26 @@ public class Refractor extends Barrier
 			{
 				if(waveVector.angle() > perpendicular.angle())
 				{
-					waveVector.setAngle(waveVector.angle() + 5);
-					waveVector.setLength(waveVector.len() + 1.5f);
+					waveVector.setAngle(waveVector.angle() + index);
+					waveVector.setLength(waveVector.len() + speedIndex);
 				}
 				else
 				{
-					waveVector.setAngle(waveVector.angle() - 5);
-					waveVector.setLength(waveVector.len() + 1.5f);
+					waveVector.setAngle(waveVector.angle() - index);
+					waveVector.setLength(waveVector.len() + speedIndex);
 				}
 			}
 			else
 			{
 				if(waveVector.angle() > perpendicular.angle())
 				{
-					waveVector.setAngle(waveVector.angle() - 5);
-					waveVector.setLength(waveVector.len() - 1.5f);
+					waveVector.setAngle(waveVector.angle() - index);
+					waveVector.setLength(waveVector.len() - speedIndex);
 				}
 				else
 				{
-					waveVector.setAngle(waveVector.angle() + 5);
-					waveVector.setLength(waveVector.len() - 1.5f);
+					waveVector.setAngle(waveVector.angle() + index);
+					waveVector.setLength(waveVector.len() - speedIndex);
 				}
 			}
 			
