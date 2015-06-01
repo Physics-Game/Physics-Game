@@ -33,10 +33,10 @@ public class WinScreen implements Screen
 		
 		Runnable mainMenu = () ->
 		{
-			Gdx.app.exit();
+			ScreenManager.setScreen(new MainMenuScreen());
 		};
 		
-		btnMainMenu = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, mainMenu, bg, "Exit Game");	
+		btnMainMenu = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, mainMenu, bg, "Main Menu");	
 	}
 
 	@Override
@@ -62,8 +62,12 @@ public class WinScreen implements Screen
 	@Override
 	public void dispose()
 	{
-		for(Disposable d : content)
+		while(content.size() > 0)
+		{
+			Disposable d = content.get(0);
 			d.dispose();
+			content.remove(0);
+		}
 	}
 	
 	private class InputHandler implements InputProcessor

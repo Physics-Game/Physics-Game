@@ -18,9 +18,7 @@ import com.jared.waves.units.barriers.Refractor;
 
 public class GameScreen implements Screen
 {
-	public static final float MIN_ZOOM = 1.0f, MAX_ZOOM = 2.0f;
-
-	public static ArrayList<Disposable> content = new ArrayList<>();
+	public static ArrayList<Disposable> content = new ArrayList<Disposable>();
 	public static OrthographicCamera cam;
 	private SpriteBatch batch;
 	public static boolean flagInitFire;
@@ -30,7 +28,8 @@ public class GameScreen implements Screen
 	@Override
 	public void create()
 	{	
-		batch = new SpriteBatch();
+		System.out.println("content.size() game " + levelOn + " "+content.size());
+		content.add(batch = new SpriteBatch());
 		cam = new OrthographicCamera(800, 600);
 		cam.setToOrtho(false);
 		Gdx.input.setInputProcessor(new InputHandler());
@@ -59,8 +58,7 @@ public class GameScreen implements Screen
 				try{
 					theta = barrier.getInt("ang");
 				}catch (Exception e){
-					System.err.println("There isn't any angle");
-				}
+					}
 
 				switch(type)
 				{
@@ -117,10 +115,7 @@ public class GameScreen implements Screen
 			flagInitFire = false;
 			levelOn++;
 			if(levelOn == levelArray.length)
-			{
 				ScreenManager.setScreen(new WinScreen());
-				batch.dispose();
-			}
 			else
 				ScreenManager.setScreen(new InBetweenScreen());				
 		}
@@ -136,8 +131,12 @@ public class GameScreen implements Screen
 	public void dispose()
 	{
 		Gdx.app.log("INFO", "GameScreen Disposed");
-		for(Disposable d : content)
+		while(content.size() > 0)
+		{
+			Disposable d = content.get(0);
 			d.dispose();
+			content.remove(0);
+		}
 	}
 
 	private class InputHandler implements InputProcessor

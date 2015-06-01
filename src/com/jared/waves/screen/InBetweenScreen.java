@@ -16,14 +16,15 @@ import com.jared.waves.widget.Button;
 
 public class InBetweenScreen implements Screen
 {
-	private Button btnNextLevel, btnExitGame;
-	public static ArrayList<Disposable> content = new ArrayList<>();
+	private Button btnNextLevel, btnRedoLevel, btnMainMenu;
+	public static ArrayList<Disposable> content = new ArrayList<Disposable>();
 	private SpriteBatch batch;
 	private BitmapFont font;
 	
 	@Override
 	public void create() 
 	{
+		System.out.println("content.size() inbetween "+content.size());
 		content.add(batch = new SpriteBatch());
 		content.add(font = new BitmapFont());
 		Gdx.input.setInputProcessor(new InputHandler());
@@ -36,13 +37,20 @@ public class InBetweenScreen implements Screen
 			ScreenManager.setScreen(new GameScreen());
 		};
 		
-		Runnable exitGame = () ->
+		Runnable redo = () ->
 		{
-			Gdx.app.exit();
+			GameScreen.levelOn--;
+			ScreenManager.setScreen(new GameScreen());
 		};
 		
-		btnNextLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 50, nextLevel, bg, "Next Level");
-		btnExitGame = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 - 20, exitGame, bg, "Exit Game");	
+		Runnable mainMenu = () ->
+		{
+			ScreenManager.setScreen(new MainMenuScreen());
+		};
+		
+		btnNextLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, nextLevel, bg, "Next Level");
+		btnRedoLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2, redo, bg, "Redo Level");
+		btnMainMenu = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 - 20, mainMenu, bg, "Main Menu");	
 	}
 
 	@Override
@@ -56,7 +64,8 @@ public class InBetweenScreen implements Screen
 		batch.draw(new Texture(PhysicsMain.ASSETPATH + "background/mainBackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		font.draw(batch, text, x, y);
 		btnNextLevel.draw(batch);
-		btnExitGame.draw(batch);
+		btnRedoLevel.draw(batch);
+		btnMainMenu.draw(batch);
 		batch.end();
 	}
 
@@ -69,8 +78,12 @@ public class InBetweenScreen implements Screen
 	@Override
 	public void dispose()
 	{
-		for(Disposable d : content)
+		while(content.size() > 0)
+		{
+			Disposable d = content.get(0);
 			d.dispose();
+			content.remove(0);
+		}
 	}
 	
 	private class InputHandler implements InputProcessor
@@ -106,8 +119,10 @@ public class InBetweenScreen implements Screen
 			{
 				if(btnNextLevel.contains(screenX, screenY))
 					btnNextLevel.handleClick(button);
-				else if(btnExitGame.contains(screenX, screenY))
-					btnExitGame.handleClick(button);
+				else if(btnRedoLevel.contains(screenX, screenY))
+					btnRedoLevel.handleClick(button);
+				else if(btnMainMenu.contains(screenX, screenY))
+					btnMainMenu.handleClick(button);
 				return true;
 			}
 			return false;
