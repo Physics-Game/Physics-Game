@@ -79,8 +79,12 @@ public class MainMenuScreen implements Screen
 	@Override
 	public void dispose()
 	{
-		for(Disposable d : content)
+		while(content.size() > 0)
+		{
+			Disposable d = content.get(0);
 			d.dispose();
+			content.remove(0);
+		}
 		Gdx.app.log("INFO", "MainMenu Disposed");
 	}
 	
