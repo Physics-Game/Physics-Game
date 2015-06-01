@@ -20,8 +20,7 @@ public class Wave
 	
 	public Wave()
 	{
-		wave = new Vector2(5, 0);
-		wave.setLength(5);
+		wave = new Vector2(8, 0);
 		x = 0;
 		y = 0;
 		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave2.png"));
@@ -59,9 +58,8 @@ public class Wave
 			
 			if(thing.equals("Reflector"))
 				return i;
-			else 
-				if(thing.equals("Refractor"))
-					return i;
+			else if(thing.equals("Refractor"))
+				return i;
 		}
 		
 		return -1;
