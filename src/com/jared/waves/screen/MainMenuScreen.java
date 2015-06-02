@@ -1,6 +1,7 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
@@ -14,8 +15,8 @@ import com.jared.waves.widget.Button;
 
 /**
  * The menu for the game.
- * @author Darian Atkinson 
  * @author Jared Bass
+ * @author Darian Atkinson 
  */
 public class MainMenuScreen implements Screen
 {
@@ -25,6 +26,9 @@ public class MainMenuScreen implements Screen
 	private SpriteBatch batch;
 	private BitmapFont font;
 	
+	/**
+	 * Creates the main menu screen
+	 */
 	@Override
 	public void create()
 	{
@@ -36,23 +40,23 @@ public class MainMenuScreen implements Screen
 		content.add(bg = new Texture(PhysicsMain.ASSETPATH + "background/btn_bg.png"));
 		Runnable btnPlayRunnable = () ->
 		{
+			GameScreen.createLevels();
 			ScreenManager.setScreen(new GameScreen());
-			batch.dispose();
 		};
-		btnPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, btnPlayRunnable, bg, "Play");
 		
 		Runnable btnHowToPlayRunnable = () ->
 		{
-			try {
+			try 
+			{
 				ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "How To Play.txt");
 				pb.start();
 				Gdx.app.log("Note", "Launching How to Play text file");
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				e.printStackTrace();
 			}
 		};
-		
-		btnHowToPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight()/2 - bg.getHeight()/2 + 25, btnHowToPlayRunnable, bg, "How To Play");
 		
 		Runnable exitGame = () ->
 		{
@@ -60,9 +64,15 @@ public class MainMenuScreen implements Screen
 			Gdx.app.exit();
 		};
 
+		//Instantiates the buttons at their locations and with runnables
+		btnHowToPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight()/2 - bg.getHeight()/2 + 25, btnHowToPlayRunnable, bg, "How To Play");
+		btnPlay = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, btnPlayRunnable, bg, "Play");
 		btnExit = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 - 20, exitGame, bg, "Exit Game");
 	}
 
+	/**
+	 * Renders the main menu screen and buttons
+	 */
 	@Override
 	public void render()
 	{
@@ -71,6 +81,7 @@ public class MainMenuScreen implements Screen
 		float x = Gdx.graphics.getWidth()/2 - bounds.width/2;
 		float y = Gdx.graphics.getHeight()*2/3 + bounds.height/2 + 85;
 		batch.begin();
+		//Draws the background of the main menu
 		batch.draw(new Texture(PhysicsMain.ASSETPATH + "background/mainBackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		font.draw(batch, text, x, y);
 		btnPlay.draw(batch);
@@ -79,24 +90,24 @@ public class MainMenuScreen implements Screen
 		batch.end();
 	}
 
-	@Override
-	public void resize(int width, int height)
-	{
-		
-	}
-
+	/**
+	 * Disposes applicable objects to save memory usage
+	 */
 	@Override
 	public void dispose()
 	{
+		//Empties array of content and releases sprites
 		while(content.size() > 0)
 		{
 			Disposable d = content.get(0);
 			d.dispose();
 			content.remove(0);
 		}
-		Gdx.app.log("INFO", "MainMenu Disposed");
 	}
-	
+
+	/**
+	 * Inner class that handles input
+	 */
 	private class InputHandler implements InputProcessor
 	{
 		@Override
@@ -123,6 +134,9 @@ public class MainMenuScreen implements Screen
 			return false;
 		}
 
+		/**
+		 * If a player clicks a button, perform the runnable
+		 */
 		@Override
 		public boolean touchUp(int screenX, int screenY, int pointer, int button)
 		{
