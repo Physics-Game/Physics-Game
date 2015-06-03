@@ -83,11 +83,13 @@ public class Reflector extends Barrier
 
 	public void reflect(Wave w)
 	{
+		int side = getSide(w);
+		
 		if(!super.used)
 		{
 			Vector2 waveVector = w.getVector();
 			
-			float thetaR = (float) (2 * degrees - waveVector.angle());
+			float thetaR = (float) (2 * (degrees + 90 * side)- waveVector.angle());
 		
 			w.rotateWave(thetaR);
 			
@@ -96,6 +98,59 @@ public class Reflector extends Barrier
 			s.setTexture(new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflectorUsed.png"));
 		}
 	}
+	
+	private int getSide(Wave w) 
+	{
+		Sprite s;
+		
+		for(int i = 0; i < 4; i++)
+		{
+			this.s.rotate((float)-degrees);
+			
+			if(i == 0)
+				s = new Sprite(background, (int)this.s.getVertices()[xs[i]] - 5, (int)this.s.getVertices()[xs[i] + 1], 5, (int)this.s.getHeight());
+			else if(i == 1)
+				s = new Sprite(background, (int)this.s.getVertices()[xs[i]], (int)this.s.getVertices()[xs[i] + 1] - 5, (int)this.s.getWidth(), 5);
+			else if(i == 2)
+				s = new Sprite(background, (int)this.s.getVertices()[xs[i]] + 5, (int)this.s.getVertices()[xs[i] + 1], 5, (int)this.s.getHeight());
+			else
+				s = new Sprite(background, (int)this.s.getVertices()[xs[i]], (int)this.s.getVertices()[xs[i] + 1] + 5, (int)this.s.getWidth(), 5);
+
+			s.rotate((float)degrees);
+			this.s.rotate((float)degrees);
+
+			System.out.println();
+			System.out.println(s.getX() + " " + s.getY());
+			System.out.println(s.getVertices()[xs[0]] + " " + s.getVertices()[xs[0] + 1]);
+			System.out.println(s.getVertices()[xs[1]] + " " + s.getVertices()[xs[1] + 1]);
+			System.out.println(s.getVertices()[xs[2]] + " " + s.getVertices()[xs[2] + 1]);
+			System.out.println(s.getVertices()[xs[3]] + " " + s.getVertices()[xs[3] + 1]);
+			
+			if(hits(w, s))
+			{
+				System.out.println(i);
+				return i + 1;
+			}
+		}
+		return 0;
+	}
+
+	public boolean hits(Wave w, Sprite s)
+	{
+		Vector2[][] axesShape = {getAxes(w.getSprite()), getAxes(s)};
+		
+		for(int r = 0; r < axesShape.length; r++)
+			for(int i = 0; i < axesShape[0].length; i++)
+			{
+				float[] x = project(w.getSprite(), axesShape[r][i]);
+				float[] x2 = project(s, axesShape[r][i]);
+				if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
+					return false;
+			}
+		
+		return true;
+	}
+
 	
 	@Override
 	public void draw(SpriteBatch batch)

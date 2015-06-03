@@ -22,7 +22,7 @@ public class GameScreen implements Screen
 	private SpriteBatch batch;
 	public static boolean flagInitFire;
 	public static Level[] levelArray;
-	public static int levelOn = 2;
+	public static int levelOn = 0;
 	
 	@Override
 	public void create()
