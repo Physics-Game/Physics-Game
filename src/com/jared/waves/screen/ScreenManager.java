@@ -1,8 +1,8 @@
 package com.jared.waves.screen;
 
 /**
- * 
- * @author Jason Carrete
+ * Class to manage the screens and display the correct one
+ * @author Jared Bass
  */
 public class ScreenManager
 {

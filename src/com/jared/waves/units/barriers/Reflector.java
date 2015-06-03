@@ -21,7 +21,8 @@ public class Reflector extends Barrier
 	
 	public Reflector(int x, int y, int width, int height, float ang)
 	{	
-		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png"));
+		background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png");
+		GameScreen.textureContent.add(background);
 		s = new Sprite(background);
 		
 		oneRotate = false;

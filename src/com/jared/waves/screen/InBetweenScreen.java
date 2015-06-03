@@ -1,6 +1,7 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Buttons;
@@ -12,6 +13,10 @@ import com.badlogic.gdx.utils.Disposable;
 import com.jared.waves.PhysicsMain;
 import com.jared.waves.widget.Button;
 
+/**
+ * The screen displayed inbetween levels or when the game is won
+ * @author Jared Bass
+ */
 public class InBetweenScreen implements Screen
 {
 	private Button btnNextLevel, btnRedoLevel, btnMainMenu;
@@ -19,10 +24,12 @@ public class InBetweenScreen implements Screen
 	private SpriteBatch batch;
 	private BitmapFont font;
 	
+	/**
+	 * Creates the screen and buttons on it
+	 */
 	@Override
 	public void create() 
 	{
-		System.out.println("content.size() inbetween "+content.size());
 		content.add(batch = new SpriteBatch());
 		content.add(font = new BitmapFont());
 		Gdx.input.setInputProcessor(new InputHandler());
@@ -43,39 +50,66 @@ public class InBetweenScreen implements Screen
 		
 		Runnable mainMenu = () ->
 		{
+			GameScreen.levelOn = 0;
 			ScreenManager.setScreen(new MainMenuScreen());
 		};
-		
+	
+		//Instantiates the buttons and places them on the screen with their contained runnables
 		btnNextLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 75, nextLevel, bg, "Next Level");
 		btnRedoLevel = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 + 25, redo, bg, "Redo Level");
 		btnMainMenu = new Button(Gdx.graphics.getWidth() / 2 - bg.getWidth()/2, Gdx.graphics.getHeight() / 2 - bg.getHeight()/2 - 20, mainMenu, bg, "Main Menu");	
 	}
 
+	/**
+	 * Renders the applicable screen and buttons
+	 */
 	@Override
 	public void render() 
 	{
-		String text = "You have beaten level " + GameScreen.levelOn + "!!";
+		batch.begin();
+		
+		//Draws the background
+		batch.draw(new Texture(PhysicsMain.ASSETPATH + "background/mainBackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
+		String text = "";
+		
+		//If the game is not over, display a generic inbetween screen
+		if(GameScreen.levelOn != GameScreen.levelArray.length)
+		{
+			text = "You have beaten level " + GameScreen.levelOn + "!!";
+			btnNextLevel.draw(batch);
+			btnRedoLevel.draw(batch);
+			btnMainMenu.draw(batch);
+		}
+		//Otherwise, display the victory screen
+		else
+		{
+			text = "You have beaten The Wave Game!!";
+			btnMainMenu.draw(batch);
+
+			//Disposes of textures used
+			while(GameScreen.textureContent.size() > 0)
+			{
+				Disposable d = GameScreen.textureContent.get(0);
+				d.dispose();
+				GameScreen.textureContent.remove(0);
+			}
+		}
+		
 		TextBounds bounds = font.getBounds(text);
 		float x = Gdx.graphics.getWidth()/2 - bounds.width/2;
 		float y = Gdx.graphics.getHeight()*2/3 + bounds.height/2 + 85;
-		batch.begin();
-		batch.draw(new Texture(PhysicsMain.ASSETPATH + "background/mainBackground.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		font.draw(batch, text, x, y);
-		btnNextLevel.draw(batch);
-		btnRedoLevel.draw(batch);
-		btnMainMenu.draw(batch);
 		batch.end();
 	}
-
-	@Override
-	public void resize(int width, int height) 
-	{
-		
-	}
-
+	
+	/**
+	 * Disposes applicable objects to save memory usage
+	 */
 	@Override
 	public void dispose()
 	{
+		//Empties array of content and releases sprites
 		while(content.size() > 0)
 		{
 			Disposable d = content.get(0);
@@ -83,7 +117,10 @@ public class InBetweenScreen implements Screen
 			content.remove(0);
 		}
 	}
-	
+
+	/**
+	 * Inner class that handles input
+	 */
 	private class InputHandler implements InputProcessor
 	{
 		@Override
@@ -110,6 +147,9 @@ public class InBetweenScreen implements Screen
 			return false;
 		}
 
+		/**
+		 * If a player clicks a button, perform the runnable
+		 */
 		@Override
 		public boolean touchUp(int screenX, int screenY, int pointer, int button)
 		{

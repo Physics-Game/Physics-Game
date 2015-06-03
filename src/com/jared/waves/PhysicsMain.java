@@ -34,8 +34,7 @@ public class PhysicsMain implements ApplicationListener
 	@Override
 	public void resize(int width, int height)
 	{
-		if(ScreenManager.getScreen() != null)
-			ScreenManager.getScreen().resize(width, height);
+		
 	}
 
 	@Override

@@ -16,7 +16,8 @@ public class Goal extends Barrier
 	public Goal(float x, float y, float width, float height)
 	{
 		hitbox = new Rectangle(x,y,width,height);
-		GameScreen.content.add(background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/goal.png"));
+		background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/goal.png");
+		GameScreen.textureContent.add(background);
 	}
 
 	public Goal(Goal g)
