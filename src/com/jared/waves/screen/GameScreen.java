@@ -1,8 +1,10 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -28,7 +30,7 @@ public class GameScreen implements Screen
 	private SpriteBatch batch;
 	public static boolean flagInitFire;
 	public static Level[] levelArray;
-	public static int levelOn = 4;
+	public static int levelOn = 0;
 	
 	/**
 	 * Reads in the json file with level data and creates the levels for the game
@@ -110,13 +112,12 @@ public class GameScreen implements Screen
 	public void render()
 	{
 		batch.setProjectionMatrix(cam.combined);
+		Level l = levelArray[levelOn];
 		
 		//If the level is not done, draw it
 		if(levelOn < levelArray.length && !levelArray[levelOn].isDone())
 		{
 			batch.begin();
-			
-			Level l = levelArray[levelOn];
 			
 			//Draws basic level features
 			l.initialDraw(batch);
@@ -134,11 +135,7 @@ public class GameScreen implements Screen
 		else //The player has won the level
 		{
 			//Reset whether the wave has been fired, and increase the level
-			flagInitFire = false;
-			levelOn++;
-			
-			//Display the applicable inbetween screen
-			ScreenManager.setScreen(new InBetweenScreen());				
+			l.levelWasBeaten();			
 		}
 	}
 
@@ -165,6 +162,8 @@ public class GameScreen implements Screen
 		@Override
 		public boolean keyDown(int keycode)
 		{
+			if(keycode == Keys.M)
+				levelArray[levelOn].levelWasBeaten();
 			return false;
 		}
 

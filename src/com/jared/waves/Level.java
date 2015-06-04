@@ -1,12 +1,15 @@
 package com.jared.waves;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jared.waves.screen.GameScreen;
+import com.jared.waves.screen.InBetweenScreen;
 import com.jared.waves.screen.Screen;
+import com.jared.waves.screen.ScreenManager;
 import com.jared.waves.units.Wave;
 import com.jared.waves.units.barriers.Barrier;
 import com.jared.waves.units.barriers.Goal;
@@ -62,6 +65,15 @@ public class Level
 		
 		if(wave.getX() > Gdx.graphics.getWidth() || wave.getY() > Gdx.graphics.getHeight() || wave.getY() < 0 || wave.getX() < 0)
 			reset();
+	}
+	
+	public void levelWasBeaten()
+	{
+		GameScreen.levelOn++;
+		reset();
+		
+		//Display the applicable inbetween screen
+		ScreenManager.setScreen(new InBetweenScreen());	
 	}
 	
 	private void reset() 
