@@ -102,37 +102,37 @@ public class Reflector extends Barrier
 	
 	private int getSide(Wave w) 
 	{
-		Sprite s;
-		
-		for(int i = 0; i < 4; i++)
-		{
-			this.s.rotate((float)-degrees);
-			
-			if(i == 0)
-				s = new Sprite(background, (int)this.s.getVertices()[xs[i]] - 5, (int)this.s.getVertices()[xs[i] + 1], 5, (int)this.s.getHeight());
-			else if(i == 1)
-				s = new Sprite(background, (int)this.s.getVertices()[xs[i]], (int)this.s.getVertices()[xs[i] + 1] - 5, (int)this.s.getWidth(), 5);
-			else if(i == 2)
-				s = new Sprite(background, (int)this.s.getVertices()[xs[i]] + 5, (int)this.s.getVertices()[xs[i] + 1], 5, (int)this.s.getHeight());
-			else
-				s = new Sprite(background, (int)this.s.getVertices()[xs[i]], (int)this.s.getVertices()[xs[i] + 1] + 5, (int)this.s.getWidth(), 5);
-
-			s.rotate((float)degrees);
-			this.s.rotate((float)degrees);
-
-			System.out.println();
-			System.out.println(s.getX() + " " + s.getY());
-			System.out.println(s.getVertices()[xs[0]] + " " + s.getVertices()[xs[0] + 1]);
-			System.out.println(s.getVertices()[xs[1]] + " " + s.getVertices()[xs[1] + 1]);
-			System.out.println(s.getVertices()[xs[2]] + " " + s.getVertices()[xs[2] + 1]);
-			System.out.println(s.getVertices()[xs[3]] + " " + s.getVertices()[xs[3] + 1]);
-			
-			if(hits(w, s))
-			{
-				System.out.println(i);
-				return i + 1;
-			}
-		}
+//		Sprite s;
+//		
+//		for(int i = 0; i < 4; i++)
+//		{
+//			this.s.rotate((float)-degrees);
+//			
+//			if(i == 0)
+//				s = new Sprite(background, (int)this.s.getVertices()[xs[i]] - 5, (int)this.s.getVertices()[xs[i] + 1], 5, (int)this.s.getHeight());
+//			else if(i == 1)
+//				s = new Sprite(background, (int)this.s.getVertices()[xs[i]], (int)this.s.getVertices()[xs[i] + 1] - 5, (int)this.s.getWidth(), 5);
+//			else if(i == 2)
+//				s = new Sprite(background, (int)this.s.getVertices()[xs[i]] + 5, (int)this.s.getVertices()[xs[i] + 1], 5, (int)this.s.getHeight());
+//			else
+//				s = new Sprite(background, (int)this.s.getVertices()[xs[i]], (int)this.s.getVertices()[xs[i] + 1] + 5, (int)this.s.getWidth(), 5);
+//
+//			s.rotate((float)degrees);
+//			this.s.rotate((float)degrees);
+//
+//			System.out.println();
+//			System.out.println(s.getX() + " " + s.getY());
+//			System.out.println(s.getVertices()[xs[0]] + " " + s.getVertices()[xs[0] + 1]);
+//			System.out.println(s.getVertices()[xs[1]] + " " + s.getVertices()[xs[1] + 1]);
+//			System.out.println(s.getVertices()[xs[2]] + " " + s.getVertices()[xs[2] + 1]);
+//			System.out.println(s.getVertices()[xs[3]] + " " + s.getVertices()[xs[3] + 1]);
+//			
+//			if(hits(w, s))
+//			{
+//				System.out.println(i);
+//				return i + 1;
+//			}
+//		}
 		return 0;
 	}
 
