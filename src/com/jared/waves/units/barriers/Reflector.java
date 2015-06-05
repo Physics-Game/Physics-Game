@@ -84,7 +84,7 @@ public class Reflector extends Barrier
 
 	public void reflect(Wave w)
 	{
-		int side = getSide(w);
+		int side = hits(w, s);
 		
 		if(!super.used)
 		{
@@ -100,45 +100,10 @@ public class Reflector extends Barrier
 		}
 	}
 	
-	private int getSide(Wave w) 
-	{
-//		Sprite s;
-//		
-//		for(int i = 0; i < 4; i++)
-//		{
-//			this.s.rotate((float)-degrees);
-//			
-//			if(i == 0)
-//				s = new Sprite(background, (int)this.s.getVertices()[xs[i]] - 5, (int)this.s.getVertices()[xs[i] + 1], 5, (int)this.s.getHeight());
-//			else if(i == 1)
-//				s = new Sprite(background, (int)this.s.getVertices()[xs[i]], (int)this.s.getVertices()[xs[i] + 1] - 5, (int)this.s.getWidth(), 5);
-//			else if(i == 2)
-//				s = new Sprite(background, (int)this.s.getVertices()[xs[i]] + 5, (int)this.s.getVertices()[xs[i] + 1], 5, (int)this.s.getHeight());
-//			else
-//				s = new Sprite(background, (int)this.s.getVertices()[xs[i]], (int)this.s.getVertices()[xs[i] + 1] + 5, (int)this.s.getWidth(), 5);
-//
-//			s.rotate((float)degrees);
-//			this.s.rotate((float)degrees);
-//
-//			System.out.println();
-//			System.out.println(s.getX() + " " + s.getY());
-//			System.out.println(s.getVertices()[xs[0]] + " " + s.getVertices()[xs[0] + 1]);
-//			System.out.println(s.getVertices()[xs[1]] + " " + s.getVertices()[xs[1] + 1]);
-//			System.out.println(s.getVertices()[xs[2]] + " " + s.getVertices()[xs[2] + 1]);
-//			System.out.println(s.getVertices()[xs[3]] + " " + s.getVertices()[xs[3] + 1]);
-//			
-//			if(hits(w, s))
-//			{
-//				System.out.println(i);
-//				return i + 1;
-//			}
-//		}
-		return 0;
-	}
-
-	public boolean hits(Wave w, Sprite s)
+	public int hits(Wave w, Sprite s)
 	{
 		Vector2[][] axesShape = {getAxes(w.getSprite()), getAxes(s)};
+		int minVal = Integer.MAX_VALUE, minAxis = 0;
 		
 		for(int r = 0; r < axesShape.length; r++)
 			for(int i = 0; i < axesShape[0].length; i++)
@@ -146,12 +111,20 @@ public class Reflector extends Barrier
 				float[] x = project(w.getSprite(), axesShape[r][i]);
 				float[] x2 = project(s, axesShape[r][i]);
 				if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
-					return false;
+					return 0;
+				else
+				{
+					if(x[1] - x2[0] < minVal)
+					{
+						minVal = (int) (x[1] - x2[0]);
+						minAxis = i + 1;
+					}
+				}
+					
 			}
 		
-		return true;
+		return minAxis;
 	}
-
 	
 	@Override
 	public void draw(SpriteBatch batch)

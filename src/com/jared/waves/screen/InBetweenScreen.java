@@ -44,7 +44,6 @@ public class InBetweenScreen implements Screen
 		
 		Runnable redo = () ->
 		{
-			System.out.println("HELLLLLLOOOOOOOOOOO");
 			GameScreen.levelOn--;
 			ScreenManager.setScreen(new GameScreen());
 		};
