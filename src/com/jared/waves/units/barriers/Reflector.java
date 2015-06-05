@@ -90,7 +90,7 @@ public class Reflector extends Barrier
 		{
 			Vector2 waveVector = w.getVector();
 			
-			float thetaR = (float) (2 * (degrees + 90 * side)- waveVector.angle());
+			float thetaR = (float) (2 * (degrees + 90 * side) - waveVector.angle());
 		
 			w.rotateWave(thetaR);
 			
@@ -116,12 +116,12 @@ public class Reflector extends Barrier
 				{
 					if(x[1] - x2[0] < minVal)
 					{
-						minVal = Math.abs((int) (x[1] - x2[0]));
+						minVal = (int) (x[1] - x2[0]);
 						minAxis = i + 1;
 					}
 					else if(x2[1] - x[0] < minVal)
 					{
-						minVal = Math.abs((int) (x[1] - x2[0]));
+						minVal = (int) (x[1] - x2[0]);
 						minAxis = i + 1;
 					}
 				}
