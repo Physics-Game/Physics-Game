@@ -175,6 +175,4 @@ public class Refractor extends Barrier
 		}
 		return new float[]{min, max};
 	}
-
-	
 }
