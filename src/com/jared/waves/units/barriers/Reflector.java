@@ -116,7 +116,12 @@ public class Reflector extends Barrier
 				{
 					if(x[1] - x2[0] < minVal)
 					{
-						minVal = (int) (x[1] - x2[0]);
+						minVal = Math.abs((int) (x[1] - x2[0]));
+						minAxis = i + 1;
+					}
+					else if(x2[1] - x[0] < minVal)
+					{
+						minVal = Math.abs((int) (x[1] - x2[0]));
 						minAxis = i + 1;
 					}
 				}
