@@ -103,29 +103,25 @@ public class Reflector extends Barrier
 	public int hits(Wave w, Sprite s)
 	{
 		Vector2[][] axesShape = {getAxes(w.getSprite()), getAxes(s)};
-		int minVal = Integer.MAX_VALUE, minAxis = 0;
+		float minVal = Float.MAX_VALUE;
+		int minAxis = 0;
 		
 		for(int r = 0; r < axesShape.length; r++)
 			for(int i = 0; i < axesShape[0].length; i++)
 			{
 				float[] x = project(w.getSprite(), axesShape[r][i]);
 				float[] x2 = project(s, axesShape[r][i]);
-				if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
-					return 0;
-				else
+
+				if(x[1] - x2[0] < minVal)
 				{
-					if(x[1] - x2[0] < minVal)
-					{
-						minVal = (int) (x[1] - x2[0]);
-						minAxis = i + 1;
-					}
-					else if(x2[1] - x[0] < minVal)
-					{
-						minVal = (int) (x[1] - x2[0]);
-						minAxis = i + 1;
-					}
+					minVal = (x[1] - x2[0]);
+					minAxis = i + 1;
 				}
-					
+				else if(x2[1] - x[0] < minVal)
+				{
+					minVal = (x2[1] - x[0]);
+					minAxis = i + 1;
+				}
 			}
 		
 		return minAxis;
