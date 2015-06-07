@@ -19,6 +19,14 @@ public class Reflector extends Barrier
 	private boolean oneRotate;
 	private Vector2 perpendicular;
 	
+	/**
+	 * Creates the reflector 
+	 * @param x X position of the reflector
+	 * @param y Y position of the reflector
+	 * @param width Width of the reflector
+	 * @param height Height of the reflector
+	 * @param ang Angle the reflector is tilted
+	 */
 	public Reflector(int x, int y, int width, int height, float ang)
 	{	
 		background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/reflector.png");
@@ -28,14 +36,16 @@ public class Reflector extends Barrier
 		oneRotate = false;
 		
 		this.width = width;
-				this.height = height;
-				xMax = width + x;
-				yMax = height + y;
+		this.height = height;
+		xMax = width + x;
+		yMax = height + y;
 		
 		s.setX(x);
 		s.setY(y);
 		
 		degrees = ang;
+		
+		//Creates the perpendicular of the reflector
 		anglePerp = (90 + ang) % 360;
 		perpendicular = new Vector2(1,0);
 		perpendicular.setAngle(anglePerp);
@@ -60,6 +70,7 @@ public class Reflector extends Barrier
 		return true;
 	}
 	
+	//Darian javadoc and comment all your stuff pls
 	private float[] project(Sprite s, Vector2 axis) 
 	{
 		float min = Float.MAX_VALUE, max = -1*Float.MAX_VALUE;
@@ -127,6 +138,9 @@ public class Reflector extends Barrier
 		return minAxis;
 	}
 	
+	/**
+	 * Draws the reflector
+	 */
 	@Override
 	public void draw(SpriteBatch batch)
 	{
@@ -149,16 +163,26 @@ public class Reflector extends Barrier
 		return s;
 	}
 	
+	/**
+	 * Gets the ID of the relfector
+	 */
 	@Override
-	public int barrierID() {
+	public int barrierID() 
+	{
 		return 1;
 	}
 
+
+	/**
+	 * Resets the sprite
+	 */
 	@Override
-	public void resetBackground() {
+	public void resetBackground() 
+	{
 		s.setTexture(background);
 	}
 	
+	//Darian javadoc and comment all your stuff pls
 	private Vector2[] getAxes(Sprite s)
 	{
 		Vector2[] axes = new Vector2[4];

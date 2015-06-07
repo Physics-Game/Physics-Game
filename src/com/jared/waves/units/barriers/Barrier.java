@@ -1,7 +1,5 @@
 package com.jared.waves.units.barriers;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jared.waves.units.Wave;
 
@@ -15,7 +13,7 @@ public abstract class Barrier
 	
 	/**
 	 * Checks for wave contact with barrier
-	 * @param w A wave that is to be compared to the barrier
+	 * @param wave A wave that is to be compared to the barrier
 	 * @return true if wave hits barrier, false otherwise
 	 */
 	public abstract boolean hits(Wave wave);
@@ -27,8 +25,14 @@ public abstract class Barrier
 	public abstract void draw(SpriteBatch batch);
 	
 	public abstract double getChangedAngle();
-		
+	
+	/**
+	 * Resets the background of the barrier once the level resets
+	 */
 	public abstract void resetBackground();
 	
+	/**
+	 * @return The ID number of the barrier
+	 */
 	public abstract int barrierID();
 }
