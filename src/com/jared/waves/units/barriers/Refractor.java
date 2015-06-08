@@ -8,6 +8,11 @@ import com.jared.waves.PhysicsMain;
 import com.jared.waves.screen.GameScreen;
 import com.jared.waves.units.Wave;
 
+/**
+ * A refractor that changes a wave's speed and angle
+ * @author Jared Bass
+ * @author Darian Atkinson
+ */
 public class Refractor extends Barrier 
 {
 	private final static int[] xs = {SpriteBatch.X1, SpriteBatch.X2, SpriteBatch.X3, SpriteBatch.X4};

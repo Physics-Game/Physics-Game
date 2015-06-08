@@ -9,6 +9,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.jared.waves.screen.MainMenuScreen;
 import com.jared.waves.screen.ScreenManager;
 
+/**
+ * Main class for the game
+ * @author Jared Bass
+ * @author Darian Atkinson
+ */
 public class PhysicsMain implements ApplicationListener 
 {
 	public static final String ASSETPATH = "com/jared/waves/assets/";

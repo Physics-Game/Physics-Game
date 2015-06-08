@@ -8,6 +8,11 @@ import com.jared.waves.PhysicsMain;
 import com.jared.waves.screen.GameScreen;
 import com.jared.waves.units.Wave;
 
+/**
+ * The goal of the level
+ * @author Jared Bass
+ * @author Darian Atkinson
+ */
 public class Goal extends Barrier
 {
 	private Rectangle hitbox;

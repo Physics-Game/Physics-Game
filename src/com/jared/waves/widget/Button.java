@@ -9,9 +9,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.jared.waves.screen.GameScreen;
 
 /**
- * A button which runs a runnable when its handle click method is called.<br>
- * @author Alex Berman
- * @author Jason Carrete
+ * A button which runs a runnable when its handle click method is called.
+ * @author Jared Bass
  */	
 public class Button
 {
@@ -20,26 +19,13 @@ public class Button
 	protected BitmapFont font;
 	protected String text;
 	protected Runnable action;
-	
-	/**
-	 * @param x X-position of the point. (assuming origin is at bottom-left)
-	 * @param y Y-position of the point. (assuming origin is at bottom-left)
-	 * @param action Function that the button should execute when clicked.
-	 * @param img Texture of the image on the button
-	 */
-	public Button(float x, float y, Runnable action, Texture img)
-	{
-		GameScreen.content.add(buttonTexture = img);
-		hitbox = new Rectangle(x, y, img.getWidth(), img.getHeight());
-		this.action = action;
-	}
-	
+
 	/**
 	 * @param x X-position of the point. (assuming origin is at bottom-left)
 	 * @param y Y-position of the point. (assuming origin is at bottom-left)
 	 * @param action Function that the button should execute when clicked.
 	 * @param bg Background Texture of this Button.
-	 * @param text Text that goes above the button.
+	 * @param text Text that goes on the button.
 	 */
 	public Button(float x, float y, Runnable action, Texture bg, Object text)
 	{
@@ -86,6 +72,9 @@ public class Button
 		return false;
 	}
 	
+	/**
+	 * Draws the button
+	 */
 	public void draw(SpriteBatch batch)
 	{
 		batch.draw(buttonTexture, hitbox.x, hitbox.y);
