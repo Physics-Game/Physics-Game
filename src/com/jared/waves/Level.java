@@ -1,7 +1,6 @@
 package com.jared.waves;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -116,18 +115,9 @@ public class Level
 		int i = wave.hits(barriers);
 		
 		if(i >= 0)
-		{
 			if(barriers.get(i).barrierID() == 1)
-			{
 				((Reflector)barriers.get(i)).reflect(wave);	
-			}
-			else
-			{
-				if((barriers.get(i).barrierID() < 4))
-				{
-					((Refractor)barriers.get(i)).refract(wave);
-				}
-			}			
-		}		
+			else if((barriers.get(i).barrierID() < 4))
+				((Refractor)barriers.get(i)).refract(wave);
 	}
 }

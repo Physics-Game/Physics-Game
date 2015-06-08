@@ -11,11 +11,11 @@ import com.jared.waves.units.Wave;
 public class Refractor extends Barrier 
 {
 	private final static int[] xs = {SpriteBatch.X1, SpriteBatch.X2, SpriteBatch.X3, SpriteBatch.X4};
-	private float xMax, yMax, width , height;
 	private Sprite s;
 	private Texture background;
 	private double degrees;
 	private float anglePerp;
+	private int sideHit;
 	private boolean oneRotate;
 	private boolean deep;
 	private Vector2 perpendicular;
@@ -35,11 +35,6 @@ public class Refractor extends Barrier
 		s = new Sprite(background);
 		
 		oneRotate = false;
-		
-		this.width = width;
-		this.height = height;
-		xMax = width + x;
-		yMax = height + y;
 		
 		s.setX(x);
 		s.setY(y);
@@ -63,30 +58,33 @@ public class Refractor extends Barrier
 			{
 				float[] x = project(w.getSprite(), axesShape[r][i]);
 				float[] x2 = project(s, axesShape[r][i]);
-				if(!((x[1] > x2[0] && x[0] < x2[1]) && (x2[1] > x[0] && x2[0] < x[1])))
+				if(!((x[1] > x2[0] && x[0] < x2[1]) || (x2[1] > x[0] && x2[0] < x[1])))
 					return false;
 			}
-		
 		return true;
 	}
 	
 	public void refract(Wave w)
 	{
+		Vector2 waveVector = w.getVector();
+		
 		if(!super.used)
 		{
-			Vector2 waveVector = w.getVector();
-			
 			if(deep)
 			{
 				if(waveVector.angle() > perpendicular.angle())
 				{
 					waveVector.setAngle(waveVector.angle() + index);
 					waveVector.setLength(waveVector.len() + speedIndex);
+					
+					System.out.println(waveVector.angle());
 				}
 				else
 				{
 					waveVector.setAngle(waveVector.angle() - index);
 					waveVector.setLength(waveVector.len() + speedIndex);
+					
+					System.out.println(waveVector.angle());
 				}
 			}
 			else
@@ -95,18 +93,21 @@ public class Refractor extends Barrier
 				{
 					waveVector.setAngle(waveVector.angle() - index);
 					waveVector.setLength(waveVector.len() - speedIndex);
+					
+					System.out.println(waveVector.angle());
 				}
 				else
 				{
 					waveVector.setAngle(waveVector.angle() + index);
 					waveVector.setLength(waveVector.len() - speedIndex);
+					
+					System.out.println(waveVector.angle());
 				}
 			}
-			
 			used = true;
 		}
 	}
-
+	
 	@Override
 	public void draw(SpriteBatch batch) 
 	{		

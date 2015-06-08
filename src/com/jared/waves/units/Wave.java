@@ -47,20 +47,20 @@ public class Wave
 	
 	public int hits(ArrayList<Barrier> barriers)
 	{
-		String thing = "";
+		String className = "";
 		
 		for(int i = 0; i < barriers.size(); i++)
 		{
 			Barrier b = barriers.get(i);
-			if(b.hits(this))
-				thing = b.getClass().getSimpleName();
 			
-			if(thing.equals("Reflector"))
+			if(b.hits(this))
+				className = b.getClass().getSimpleName();
+			
+			if(className.equals("Reflector"))
 				return i;
-			else if(thing.equals("Refractor"))
+			else if(className.equals("Refractor"))
 				return i;
 		}
-		
 		return -1;
 	}
 	
