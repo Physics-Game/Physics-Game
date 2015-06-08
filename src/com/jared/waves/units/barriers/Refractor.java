@@ -20,7 +20,6 @@ public class Refractor extends Barrier
 	private Texture background;
 	private double degrees;
 	private float anglePerp;
-	private int sideHit;
 	private boolean oneRotate;
 	private boolean deep;
 	private Vector2 perpendicular;
@@ -53,6 +52,11 @@ public class Refractor extends Barrier
 		used = false;
 	}
 	
+	/**
+	 * Uses the Separating Axis Theorem (SAT) to detect collisions
+	 * @param Wave w
+	 * @return boolean didItHit
+	 */
 	@Override
 	public boolean hits(Wave w)
 	{
@@ -69,6 +73,10 @@ public class Refractor extends Barrier
 		return true;
 	}
 	
+	/**
+	 * approximately changes the wave angle through an infinitely large medium
+	 * @param Wave w
+	 */
 	public void refract(Wave w)
 	{
 		Vector2 waveVector = w.getVector();
@@ -145,6 +153,11 @@ public class Refractor extends Barrier
 		
 	}
 
+	/**
+	 * Gets the axes to be tested in SAT
+	 * @param Sprite s
+	 * @return Vector2[] axes
+	 */
 	private Vector2[] getAxes(Sprite s)
 	{
 		Vector2[] axes = new Vector2[4];
@@ -160,6 +173,12 @@ public class Refractor extends Barrier
 		return axes;
 	}
 	
+	/**
+	 * Projects each point vetor on the axes to be tested in SAT
+	 * @param Sprite s
+	 * @param Vector2 axis
+	 * @return float[] projections
+	 */
 	private float[] project(Sprite s, Vector2 axis) 
 	{
 		float min = Float.MAX_VALUE, max = -1*Float.MAX_VALUE;

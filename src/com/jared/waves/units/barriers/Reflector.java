@@ -59,6 +59,11 @@ public class Reflector extends Barrier
 		used = false;
 	}
 
+	/**
+	 * Uses the Separating Axis Theorem (SAT) to detect collisions
+	 * @param Wave w
+	 * @return boolean didItHit
+	 */
 	public boolean hits(Wave w)
 	{
 		Vector2[][] axesShape = {getAxes(w.getSprite()), getAxes(s)};
@@ -75,7 +80,12 @@ public class Reflector extends Barrier
 		return true;
 	}
 	
-	//Darian javadoc and comment all your stuff pls
+	/**
+	 * Projects each point vetor on the axes to be tested in SAT
+	 * @param Sprite s
+	 * @param Vector2 axis
+	 * @return float[] projections
+	 */
 	private float[] project(Sprite s, Vector2 axis) 
 	{
 		float min = Float.MAX_VALUE, max = -1*Float.MAX_VALUE;
@@ -177,7 +187,6 @@ public class Reflector extends Barrier
 		return 1;
 	}
 
-
 	/**
 	 * Resets the sprite
 	 */
@@ -187,7 +196,11 @@ public class Reflector extends Barrier
 		s.setTexture(background);
 	}
 	
-	//Darian javadoc and comment all your stuff pls
+	/**
+	 * Gets the axes to be tested in SAT
+	 * @param Sprite s
+	 * @return Vector2[] axes
+	 */
 	private Vector2[] getAxes(Sprite s)
 	{
 		Vector2[] axes = new Vector2[4];
