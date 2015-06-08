@@ -10,6 +10,11 @@ import com.jared.waves.PhysicsMain;
 import com.jared.waves.screen.GameScreen;
 import com.jared.waves.units.barriers.Barrier;
 
+/**
+ * Wave that moves along the screen
+ * @author Jared Bass
+ * @author Darian Atkinson
+ */
 public class Wave
 {
 	private Vector2 wave;
@@ -17,6 +22,9 @@ public class Wave
 	private Texture texture;
 	private float x, y;
 	
+	/**
+	 * Constructs a wave as a vector with origin at the bottom left corner
+	 */
 	public Wave()
 	{
 		wave = new Vector2(8, 0);
@@ -26,25 +34,31 @@ public class Wave
 		s = new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave2.png"));
 	}	
 	
-	public Wave(float xPos, float yPos)
-	{
-		wave = new Vector2(xPos, yPos);
-		x = xPos;
-		y = yPos;
-		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave2.png"));
-	}
-	
+	/**
+	 * Rotates the wave
+	 * @param degrees The degree you want to rotate the wave to
+	 */
 	public void rotateWave(float degrees)
 	{
 		wave.setAngle(degrees);
 		s.setRotation(degrees);
 	}
 	
+	/**
+	 * Checks if the wave hits the barrier
+	 * @param b The barrier being checked
+	 * @return True if the wave has hit the barrier, false otherwise
+	 */
 	public boolean hitsObject(Barrier b)
 	{
 		return b.hits(this);
 	}
 	
+	/**
+	 * Checks every barrier in a level and if the wave has hit it
+	 * @param barriers The level's list of barriers
+	 * @return The index of the barrier hit, -1 otherwise
+	 */
 	public int hits(ArrayList<Barrier> barriers)
 	{
 		String className = "";
@@ -69,11 +83,6 @@ public class Wave
 		return wave;
 	}
 	
-	public void setVector(Vector2 v)
-	{
-		wave = new Vector2(v);
-	}
-	
 	public float getX()
 	{
 		return x;
@@ -89,6 +98,9 @@ public class Wave
 		return s;
 	}
 	
+	/**
+	 * Moves the wave by moving the sprite the distance of the vector at the wave's angle
+	 */
 	public void translate()
 	{
 		float xTrans = (float)(wave.len() * Math.cos(Math.toRadians((double)wave.angle())));
@@ -100,6 +112,9 @@ public class Wave
 		y = s.getY();
 	}
 	
+	/**
+	 * Draws the wave's sprite
+	*/
 	public void draw(SpriteBatch batch)
 	{
 		s.draw(batch);
