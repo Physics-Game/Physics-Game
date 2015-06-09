@@ -3,6 +3,7 @@ Single player puzzle game demonstrating the properties of waves
 
 ## Project Setup
 Used when you want to run project in Eclipse
+1. Click "Download Zip" on Github page and add project that way, or follow steps to clone project into Eclipse
 1. Unzip version 1.5.4 at http://libgdx.badlogicgames.com/releases/ to any location
 2. Then open Eclipse, and navigate to Window->Preferences->Java->Build Path->User Libraries
 3. Select 'New' and call it 'Libgdx'
