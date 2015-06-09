@@ -1,1 +1,35 @@
+﻿Welcome to The Wave Game!!!
+
 How To Play:
+
+The Goal: Put the wave into the goal
+
+The Barriers: Reflector: yellow rectangle --> reflects the wave using angle of incidence = angle of reflection
+	      Refractor (Shallow): light blue rectangle --> bends the wave away from the normal
+	      Refractor (Deep): dark blue rectangle --> bends the wave towards the normal
+	      Goal: the green rectangle --> your objective
+			  
+Rules: Barriers can only be used once per level. If you miss the goal the level will reset.		  
+			  
+Summary: Its a fairly straightforward game that has 10 levels and is single player   Have Fun! :)
+
+
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+░░░░░░░░░░░░░▄▄▄▄▄▄▄░░░░░░░░░
+░░░░░░░░░▄▀▀▀░░░░░░░▀▄░░░░░░░
+░░░░░░░▄▀░░░░░░░░░░░░▀▄░░░░░░
+░░░░░░▄▀░░░░░░░░░░▄▀▀▄▀▄░░░░░
+░░░░▄▀░░░░░░░░░░▄▀░░██▄▀▄░░░░
+░░░▄▀░░▄▀▀▀▄░░░░█░░░▀▀░█▀▄░░░
+░░░█░░█▄▄░░░█░░░▀▄░░░░░▐░█░░░
+░░▐▌░░█▀▀░░▄▀░░░░░▀▄▄▄▄▀░░█░░
+░░▐▌░░█░░░▄▀░░░░░░░░░░░░░░█░░
+░░▐▌░░░▀▀▀░░░░░░░░░░░░░░░░▐▌░
+░░▐▌░░░░░░░░░░░░░░░▄░░░░░░▐▌░
+░░▐▌░░░░░░░░░▄░░░░░█░░░░░░▐▌░
+░░░█░░░░░░░░░▀█▄░░▄█░░░░░░▐▌░
+░░░▐▌░░░░░░░░░░▀▀▀▀░░░░░░░▐▌░
+░░░░█░░░░░░░░░░░░░░░░░░░░░█░░
+░░░░▐▌▀▄░░░░░░░░░░░░░░░░░▐▌░░
+░░░░░█░░▀░░░░░░░░░░░░░░░░▀░░░
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
