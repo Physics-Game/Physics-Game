@@ -30,8 +30,8 @@ public class Wave
 		wave = new Vector2(8, 0);
 		x = 0;
 		y = 0;
-		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave2.png"));
-		s = new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave2.png"));
+		GameScreen.content.add(texture = new Texture(PhysicsMain.ASSETPATH + "sprites/wave3.png"));
+		s = new Sprite(new Texture(PhysicsMain.ASSETPATH + "sprites/wave3.png"));
 	}	
 	
 	/**
