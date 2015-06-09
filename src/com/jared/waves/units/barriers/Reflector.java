@@ -108,6 +108,10 @@ public class Reflector extends Barrier
 		return new float[]{min, max};
 	}
 
+	/**
+	 * reflects the wave
+	 * @param Wave w
+	 */
 	public void reflect(Wave w)
 	{
 		int side = hits(w, s);
@@ -126,6 +130,12 @@ public class Reflector extends Barrier
 		}
 	}
 	
+	/**
+	 * Uses a variation of SAT that returns the side number that was hit
+	 * @param Wave w
+	 * @param Sprite s
+	 * @return
+	 */
 	public int hits(Wave w, Sprite s)
 	{
 		Vector2[][] axesShape = {getAxes(w.getSprite()), getAxes(s)};
