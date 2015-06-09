@@ -58,7 +58,6 @@ public class MainMenuScreen implements Screen
 			}
 		};
 		
-		
 		Runnable exitGame = () ->
 		{
 			Gdx.app.log("INFO", "Game Closed");
