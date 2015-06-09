@@ -74,7 +74,7 @@ public class Refractor extends Barrier
 	}
 	
 	/**
-	 * approximately changes the wave angle through an infinitely large medium
+	 * Approximately changes the wave angle through an infinitely large medium
 	 * @param Wave w
 	 */
 	public void refract(Wave w)
@@ -89,15 +89,11 @@ public class Refractor extends Barrier
 				{
 					waveVector.setAngle(waveVector.angle() + index);
 					waveVector.setLength(waveVector.len() + speedIndex);
-					
-					System.out.println(waveVector.angle());
 				}
 				else
 				{
 					waveVector.setAngle(waveVector.angle() - index);
 					waveVector.setLength(waveVector.len() + speedIndex);
-					
-					System.out.println(waveVector.angle());
 				}
 			}
 			else
@@ -106,15 +102,11 @@ public class Refractor extends Barrier
 				{
 					waveVector.setAngle(waveVector.angle() - index);
 					waveVector.setLength(waveVector.len() - speedIndex);
-					
-					System.out.println(waveVector.angle());
 				}
 				else
 				{
 					waveVector.setAngle(waveVector.angle() + index);
 					waveVector.setLength(waveVector.len() - speedIndex);
-					
-					System.out.println(waveVector.angle());
 				}
 			}
 			used = true;
