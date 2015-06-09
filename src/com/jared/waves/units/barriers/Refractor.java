@@ -28,9 +28,9 @@ public class Refractor extends Barrier
 	public Refractor(int x, int y, int width, int height, float ang, boolean isDeep)
 	{
 		if(isDeep)
-			background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/refractordeep.png");
+			background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/refractordeepA.png");
 		else
-			background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/refractorshallow.png");
+			background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/refractorshallowA.png");
 		
 		GameScreen.textureContent.add(background);
 		
