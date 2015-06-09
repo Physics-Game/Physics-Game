@@ -161,8 +161,6 @@ public class GameScreen implements Screen
 		@Override
 		public boolean keyDown(int keycode)
 		{
-			if(keycode == Keys.M)
-				levelArray[levelOn].levelWasBeaten();
 			return false;
 		}
 
