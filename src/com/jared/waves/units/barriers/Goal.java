@@ -50,7 +50,7 @@ public class Goal extends Barrier
 	public boolean hits(Wave wave)
 	{
 		Sprite waveS = wave.getSprite();
-		return hitbox.contains(waveS.getX(), waveS.getY());
+		return hitbox.contains(waveS.getX(), waveS.getY()) || hitbox.contains(waveS.getBoundingRectangle());
 	}
 	
 	/**
