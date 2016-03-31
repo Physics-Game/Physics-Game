@@ -74,6 +74,8 @@ public class Wave
 				return i;
 			else if(className.equals("Refractor"))
 				return i;
+			else if(className.equals("Goal"))
+				return i;
 		}
 		return -1;
 	}
