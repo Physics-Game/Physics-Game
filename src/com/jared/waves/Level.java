@@ -1,6 +1,7 @@
 package com.jared.waves;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -14,6 +15,7 @@ import com.jared.waves.units.barriers.Barrier;
 import com.jared.waves.units.barriers.Goal;
 import com.jared.waves.units.barriers.Reflector;
 import com.jared.waves.units.barriers.Refractor;
+import com.jared.waves.units.barriers.Teleporter;
 
 /**
  * Level of the game
@@ -185,7 +187,9 @@ public class Level
 			}
 			else
 			{
-				if((barriers.get(i).barrierID() < 4))//Refractor
+				if((barriers.get(i).barrierID() == 5))
+					((Teleporter)barriers.get(i)).Teleport(wave);
+				else if((barriers.get(i).barrierID() < 4))//Refractor
 				{
 					//Casts the barrier to a Refractor and calls the refract method
 					((Refractor)barriers.get(i)).refract(wave);

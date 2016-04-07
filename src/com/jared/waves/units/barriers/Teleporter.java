@@ -17,29 +17,30 @@ import com.jared.waves.units.Wave;
 public class Teleporter extends Barrier 
 {
 	private final static int[] xs = {SpriteBatch.X1, SpriteBatch.X2, SpriteBatch.X3, SpriteBatch.X4};
-	private Sprite s;
+	private Sprite s, s2;
 	private Texture background;
 	private double degrees;
 	private float anglePerp;
 	private boolean oneRotate;
-	private boolean first;
 	private Vector2 perpendicular;
 	private final float index = 10, speedIndex = 1.5f;
 	
-	public Teleporter(int x, int y, int x1, int y1, int width, int height, float ang, boolean first)
+	public Teleporter(int x, int y, int x1, int y1, int width, int height, float ang)
 	{
 		background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/teleporter.png");
 		
 		GameScreen.textureContent.add(background);
 		
-		this.first = first;
-		
 		s = new Sprite(background);
+		s2 = new Sprite(background);
 		
 		oneRotate = false;
 		
 		s.setX(x);
 		s.setY(y);
+		
+		s2.setX(x1);
+		s2.setY(y1);
 		
 		degrees = ang;
 		anglePerp = (90 + ang) % 360;
@@ -81,14 +82,20 @@ public class Teleporter extends Barrier
 		
 		if(!super.used)
 		{
-			//waveVector.x = 
+			w.setX(s.getX() - waveVector.x + s2.getX());
+			w.setY(s.getY() - waveVector.y + s2.getY());
+			
 		}
+		
+		System.out.println(w.getX());
+		System.out.println(w.getY());
 	}
 	
 	@Override
 	public void draw(SpriteBatch batch) 
 	{		
 		s.draw(batch);
+		s2.draw(batch);
 		
 		if(!oneRotate)
 		{
@@ -97,8 +104,7 @@ public class Teleporter extends Barrier
 		}
 	}
 
-	@Override
-	public double getChangedAngle() 
+	public double getNewPos() 
 	{
 		return 0;
 	}
@@ -106,15 +112,11 @@ public class Teleporter extends Barrier
 	@Override
 	public int barrierID() 
 	{
-		if(first)
-			return 5;
-		return 3;
+		return 5;
 	}
 
 	@Override
 	public void resetBackground() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	/**
@@ -163,5 +165,11 @@ public class Teleporter extends Barrier
 
 		}
 		return new float[]{min, max};
+	}
+
+	@Override
+	public double getChangedAngle() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

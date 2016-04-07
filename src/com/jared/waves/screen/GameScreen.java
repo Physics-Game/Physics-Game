@@ -1,6 +1,7 @@
 package com.jared.waves.screen;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.Input.Keys;
@@ -15,6 +16,7 @@ import com.jared.waves.Level;
 import com.jared.waves.units.barriers.Goal;
 import com.jared.waves.units.barriers.Reflector;
 import com.jared.waves.units.barriers.Refractor;
+import com.jared.waves.units.barriers.Teleporter;
 
 /**
  * The screen holding the game itself
@@ -29,7 +31,7 @@ public class GameScreen implements Screen
 	private SpriteBatch batch;
 	public static boolean flagInitFire;
 	public static Level[] levelArray;
-	public static int levelOn = 0;
+	public static int levelOn = 10;
 	
 	/**
 	 * Reads in the json file with level data and creates the levels for the game
@@ -57,8 +59,13 @@ public class GameScreen implements Screen
 				int type = barrier.getInt("btype");
 				int x = barrier.getInt("x");
 				int y = barrier.getInt("y");
+				int x1 = 0, y1 = 0;
 				int theta = barrier.getInt("ang");
-
+				try{
+					x1 = barrier.getInt("x1");
+					y1 = barrier.getInt("y1");
+				}catch(Exception e){}
+				
 				//Determines the type of barrier and uses the appropriate constructor
 				switch(type)
 				{
@@ -82,6 +89,11 @@ public class GameScreen implements Screen
 						Goal g = new Goal(x,y,100,33);
 						levelArray[level].addBarrier(g);
 						levelArray[level].createGoal(g);
+						break;
+					}
+					case 5:
+					{
+						levelArray[level].addBarrier(new Teleporter(x,y, x1, y1,100,33,theta));
 						break;
 					}
 				}

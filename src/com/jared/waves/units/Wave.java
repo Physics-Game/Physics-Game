@@ -76,6 +76,8 @@ public class Wave
 				return i;
 			else if(className.equals("Goal"))
 				return i;
+			else if(className.equals("Teleporter"))
+				return i;
 		}
 		return -1;
 	}
@@ -120,5 +122,15 @@ public class Wave
 	public void draw(SpriteBatch batch)
 	{
 		s.draw(batch);
+	}
+	
+	public void setX(float x)
+	{
+		s.setX(x);
+	}
+	
+	public void setY(float y)
+	{
+		s.setY(y);
 	}
 }
