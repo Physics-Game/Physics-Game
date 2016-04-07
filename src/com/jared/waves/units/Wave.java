@@ -126,11 +126,13 @@ public class Wave
 	
 	public void setX(float x)
 	{
+		this.x = x;
 		s.setX(x);
 	}
 	
 	public void setY(float y)
 	{
+		this.y = y;
 		s.setY(y);
 	}
 }

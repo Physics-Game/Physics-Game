@@ -78,13 +78,10 @@ public class Teleporter extends Barrier
 	 */
 	public void Teleport(Wave w)
 	{
-		Vector2 waveVector = w.getVector();
-		
 		if(!super.used)
 		{
-			w.setX(s.getX() - waveVector.x + s2.getX());
-			w.setY(s.getY() - waveVector.y + s2.getY());
-			
+			w.setX(s2.getX());
+			w.setY(s2.getY());
 		}
 		
 		System.out.println(w.getX());
