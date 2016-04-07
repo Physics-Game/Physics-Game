@@ -18,7 +18,7 @@ public class Teleporter extends Barrier
 {
 	private final static int[] xs = {SpriteBatch.X1, SpriteBatch.X2, SpriteBatch.X3, SpriteBatch.X4};
 	private Sprite s, s2;
-	private Texture background;
+	private Texture background, background2;
 	private double degrees;
 	private float anglePerp;
 	private boolean oneRotate;
@@ -28,11 +28,14 @@ public class Teleporter extends Barrier
 	public Teleporter(int x, int y, int x1, int y1, int width, int height, float ang)
 	{
 		background = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/teleporter.png");
+		background2 = new Texture(PhysicsMain.ASSETPATH + "sprites/barriers/teleporterUsed.png");
+		
 		
 		GameScreen.textureContent.add(background);
+		GameScreen.textureContent.add(background2);
 		
 		s = new Sprite(background);
-		s2 = new Sprite(background);
+		s2 = new Sprite(background2);
 		
 		oneRotate = false;
 		
@@ -78,16 +81,8 @@ public class Teleporter extends Barrier
 	 */
 	public void Teleport(Wave w)
 	{
-		
-		System.out.println(s.getX() - w.getX());
-		System.out.println(s.getY() - w.getY());
-		if(!super.used)
-		{
-			w.setX(s.getX() - w.getX() + s2.getX());
-			w.setY(s.getY() - w.getY() + s2.getY());
-		}
-		
-
+			w.setX(s2.getX());
+			w.setY(s2.getY());
 	}
 	
 	@Override
