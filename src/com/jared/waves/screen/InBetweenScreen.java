@@ -85,6 +85,7 @@ public class InBetweenScreen implements Screen
 		else
 		{
 			text = "You have beaten The Wave Game!!";
+			//btnRedoLevel.draw(batch);
 			btnMainMenu.draw(batch);
 
 			//Disposes of textures used

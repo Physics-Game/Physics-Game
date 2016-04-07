@@ -31,7 +31,7 @@ public class GameScreen implements Screen
 	private SpriteBatch batch;
 	public static boolean flagInitFire;
 	public static Level[] levelArray;
-	public static int levelOn = 0;
+	public static int levelOn = 10;
 	
 	/**
 	 * Reads in the json file with level data and creates the levels for the game
